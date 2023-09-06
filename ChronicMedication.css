@@ -1,0 +1,132 @@
+﻿body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Style the form container */
+form {
+    width: 180%;
+    margin: 60px auto;
+    padding: 35px;
+    background-color: #f9f9f9;
+    border-radius: 35px;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+}
+
+    /* Style the form header */
+    form h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 2em;
+        color: black;
+    }
+
+/* Style the form labels */
+label {
+    display: block;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+/* Style the form inputs */
+input[type="text"],
+input[type="date"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.2em;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: inset 0px 1px 3px 0px rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+}
+
+/* Style the form submit button */
+input[type="submit"] {
+    background-color: #1c87c9;
+    color: #fff;
+    font-size: 1.2em;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+    input[type="submit"]:hover {
+        background-color: #135f8c;
+    }
+/* Set default styles for the navigation menu */
+
+/* Set default styles for the navigation menu */
+nav {
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+    nav ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        text-align: left;
+    }
+
+        nav ul li {
+            display: inline-block;
+        }
+
+            nav ul li a {
+                display: block;
+                color: #fff;
+                text-decoration: none;
+                padding: 10px 20px;
+            }
+
+                nav ul li a:hover {
+                    background-color: #666;
+                }
+
+/* Set styles for the dropdown menu */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    content: "\25BC";
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+    display: none;
+    min-width: 160px;
+    background-color: #fff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 5px 0;
+}
+
+    .dropdown-menu li a {
+        display: block;
+        color: #333;
+        padding: 10px 20px;
+    }
+
+        .dropdown-menu li a:hover {
+            background-color: #f2f2f2;
+        }
+
+/* Show the dropdown menu when the parent link is hovered over */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Set styles for the right-side links */
+.right-side {
+    float: right;
+}
