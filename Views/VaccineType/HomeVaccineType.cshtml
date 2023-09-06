@@ -1,0 +1,252 @@
+﻿@model IEnumerable<VaccineWebApp.Models.VaccineTypeModel>
+<link rel="stylesheet" href="~/css/VaccineHome.css" asp-append-version="true" />
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <hr />
+            <h2 style="color: black">List of Vaccine Types</h2>
+            <hr/>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-controller="VaccineType" asp-action="Create" class="btn btn-primary">Add New Vaccine Type</a>
+        </div>
+    </div>
+    <br />
+
+    @if (Model.Count() > 0)
+    {
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Vaccine Type names..">
+        <table id="myTable" class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        Vaccine Type Name
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Update Vaccine Type
+                    </th>
+                    <th>
+                        Delete Vaccine Type
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var vaccineType in Model)
+                {
+                    <tr>
+                        <td width="30%">@vaccineType.TypeName</td>
+                        <td width="30%">@vaccineType.Description</td>
+                        <td width="10%" style="text-align: right;">
+                            <div class="btn-group" role="group">
+                                <a asp-controller="VaccineType" asp-action="Update" asp-route-ID="@vaccineType.TypeID" class="btn btn-primary" >Update Vaccine Type</a>
+                            </div>
+                        </td>
+                        <td width="10%" style="text-align: left;">
+                            <div class="btn-group" role="group">
+                                <a asp-controller="VaccineType" asp-action="Delete" asp-route-ID="@vaccineType.TypeID" class="btn btn-primary">🗑</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+    else
+    {
+        <p>No Vaccine Types were added yet</p>
+    }
+
+</div>
+<hr />
+<div class="col">
+    <div class="card my-3" id="patient-portal-dashboard-card-useful-links">
+        <div class="card-header">
+            <h2>Useful Links</h2>
+        </div>
+        <div class="card-body p-0">
+            <table class="table w-100 table-dashboard-middle">
+                <tbody>
+                    <tr height="50%">
+                        <td class="text-center border-right pt-3" width="33%">
+                            <h3 class="text-transform-none">Vaccine Bookings</h3>
+                            <p>To Display the Vaccine Bookings that were made for patients</p>
+                            <a class="btn btn-outline-primary-light" id="btnVaccineBooking" asp-controller="VaccineBooking" asp-action="HomeBooking">
+                                Display Vaccine Bookings
+                            </a>
+                        </td>
+                        <td class="text-center border-right pt-3" width="33%">
+                            <h3 class="text-transform-none">Vaccines</h3>
+                            <p>All the Different Vaccine offered at the Facility are found here </p>
+                            <a class="btn btn-outline-primary-light" id="btnVaccine" asp-controller="Vaccine" asp-action="HomeVaccine">
+                                Display Available Vaccines
+                            </a>
+
+                        </td>
+                        <td class="text-center pt-3" width="33%">
+                            <h3 class="text-transform-none">Patient & Vaccine Details</h3>
+                            <p>To check whether a patient has recieved a Specific Vaccine at the facility before </p>
+                            <a class="btn btn-outline-primary-light" id="btnPatientVac" asp-controller="PatientVaccineDetails" asp-action="HomePatientVaccine">
+                                Display Patient and Vaccine Details
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+
+<div class="d-flex mb-4 mb-lg-0">
+    <div class="custom-block bg-white shadow-lg">
+        <div class="d-flex">
+            <div>
+                <h5 class="mb-2"> Vaccine Types Information:</h5>
+                <p class="mb-0">
+                    There are several different types of vaccines. Each type is designed to teach your immune system how to fight off certain kinds of germs—and the serious diseases they cause.
+
+                    When scientists create vaccines, they consider:
+
+                    How your immune system responds to the germ
+                    Who needs to be vaccinated against the germ
+                    The best technology or approach to create the vaccine
+
+                </p>
+            </div>
+            <span class="badge bg-design rounded-pill ms-auto">💡</span>
+        </div>
+        <img src="~/css/Vaccine_1.jpeg" class="custom-block-image img-fluid" alt="">
+    </div>
+
+    <div class="custom-block bg-white shadow-lg">
+        <div class="d-flex">
+            <div>
+                <h5 class="mb-2">The Vaccine types to be used at the facility </h5>
+                <p class="mb-0">
+                    Inactivated vaccines.
+                    Live-attenuated vaccines.
+                    Messenger RNA (mRNA) vaccines.
+                    Subunit, recombinant, polysaccharide, and conjugate vaccines.
+                    Toxoid vaccines.
+                    Viral vector vaccines.
+                </p>
+            </div>
+            <span class="badge bg-design rounded-pill ms-auto">💡</span>
+        </div>
+        <img src="~/css/World.jpeg" class="custom-block-image img-fluid" alt="">
+    </div>
+
+    <div class="custom-block bg-white shadow-lg ml-auto">
+        <div class="d-flex">
+            <div>
+                <h5 class="mb-2">Vaccine Storage Conditions</h5>
+                <p class="mb-0">
+                    Vaccines licensed for refrigerator storage should be stored at 2°C-8°C (36°F-46°F).
+                    Liquid vaccines containing an aluminum adjuvant permanently lose potency when exposed to freezing temperatures.
+                </p>
+            </div>
+            <span class="badge bg-design rounded-pill ms-auto">💡</span>
+        </div>
+        <img src="~/css/Doctor.jpeg" class="custom-block-image img-fluid" alt="">
+    </div>
+</div>
+
+<hr />
+
+<section class="faq-section section-padding" id="section_4">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-6 col-12">
+                <hr />
+                <h2 class="mb-4" style="color: black">Frequently Asked Questions about Vaccines</h2>
+                <hr />
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="col-lg-5 col-12">
+                <img src="~/css/Elivis.jpg" class="img-fluid" alt="FAQs">
+            </div>
+
+            <div class="col-lg-6 col-12 m-auto">
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                What are vaccines?
+                            </button>
+                        </h2>
+
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
+                            <div class="accordion-body">
+                                Vaccines are products that are usually given in childhood to protect against serious, often deadly diseases. By stimulating your body’s natural defenses, they prepare your body to fight the disease faster and more effectively.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                How do vaccines work?
+                            </button>
+                        </h2>
+
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample" style="">
+                            <div class="accordion-body">
+                                Vaccines help your immune system fight infections more efficiently by sparking your immune response to specific diseases. Then, if the virus or bacteria ever invades your body in the future, your immune system will already know how to fight it.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                What are live vaccines?
+                            </button>
+                        </h2>
+
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample" style="">
+                            <div class="accordion-body">
+                                Live vaccines contain a version of a living virus or bacteria that has been attenuated (weakened). They teach the immune system to fight viruses and bacteria but because they are weakened, they do not cause disease in people with healthy immune systems.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<script>
+    function myFunction() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>

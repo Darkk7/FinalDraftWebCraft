@@ -1,0 +1,260 @@
+﻿@model IEnumerable<VaccineWebApp.Models.VaccinationBookingModel>
+
+<link rel="stylesheet" href="~/css/VaccineHome.css" asp-append-version="true" />
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-md-6">
+            <hr />
+            <h2 style="color:black">List of Booking</h2>
+            <hr />
+        </div>
+        <div class="col-md-6 text-right">
+            <a asp-controller="VaccineBooking" asp-action="Create" class="btn btn-primary" >Add a new Booking</a>
+        </div>
+    </div>
+    <br />
+
+    @if (Model.Count() > 0)
+    {
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search Patient names..">
+        <table id="myTable" class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        Patient Name
+                    </th>
+                    <th>
+                        Vaccine Name
+                    </th>
+                    <th>
+                        Booking Date
+                    </th>
+                    <th>
+                        Vaccine Dose Number
+                    </th>
+                     <th>
+                        Update Booking
+                    </th>
+                    <th>
+                        Delete Booking
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var vaccinationBooking in Model)
+                {
+                    <tr>
+                        <td width="30%">@vaccinationBooking.PatientID</td>
+                        <td width="30%">@vaccinationBooking.VaccineID</td>
+                        <td width="30%">@vaccinationBooking.BookingDate</td>
+                        <td width="30%">@vaccinationBooking.DoseNumber</td>
+                        <td width="10%" style="text-align: right;">
+                            <div class="btn-group" role="group">
+                                <a asp-controller="VaccineBooking" asp-action="Update" asp-route-ID="@vaccinationBooking.VaccineBookingID" class="btn btn-primary">Update Booking</a>
+                            </div>
+                        </td>
+                        <td width="10%" style="text-align: left;">
+                            <div class="btn-group" role="group">
+                                <a asp-controller="VaccineBooking" asp-action="Delete" asp-route-ID="@vaccinationBooking.VaccineBookingID" class="btn btn-primary">🗑</a>
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+    }
+    else
+    {
+        <p>No booking have been added</p>
+    }
+
+</div>
+
+<hr />
+
+<div class="col">
+    <div class="card my-3" id="patient-portal-dashboard-card-useful-links">
+        <div class="card-header">
+            <h2>Useful Links</h2>
+        </div>
+        <div class="card-body p-0">
+            <table class="table w-100 table-dashboard-middle">
+                <tbody>
+                    <tr height="50%">
+                        <td class="text-center border-right pt-3" width="33%">
+                            <h3 class="text-transform-none">Vaccine Types</h3>
+                            <p>Find the Different Vaccine Types offered at the Facility here</p>
+                            <a class="btn btn-outline-primary-light" id="btnVaccineType" asp-controller="VaccineType" asp-action="HomeVaccineType">
+                                Display Vaccine Types
+                            </a>
+                        </td>
+                        <td class="text-center border-right pt-3" width="33%">
+                            <h3 class="text-transform-none">Vaccines</h3>
+                            <p>All the Different Vaccine offered at the Facility are found here </p>
+                            <a class="btn btn-outline-primary-light" id="btnVaccine" asp-controller="Vaccine" asp-action="HomeVaccine">
+                                Display Available Vaccines
+                            </a>
+
+                        </td>
+                        <td class="text-center pt-3" width="33%">
+                            <h3 class="text-transform-none">Patient & Vaccine Details</h3>
+                            <p>To check whether a patient has recieved a Specific Vaccine at the facility before </p>
+                            <a class="btn btn-outline-primary-light" id="btnPatientVac" asp-controller="PatientVaccineDetails" asp-action="HomePatientVaccine">
+                                Display Patient and Vaccine Details
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div class="d-flex mb-4 mb-lg-0">
+    <div class="custom-block bg-white shadow-lg">
+        <div class="d-flex">
+            <div>
+                <h5 class="mb-2"> Use this service to:</h5>
+                <p class="mb-0">
+                    Book a Vaccine Slot
+                    Check existing appointment details
+                    Change appointments
+                    Delete appointments
+                </p>
+            </div>
+            <span class="badge bg-design rounded-pill ms-auto" style="color:black">💡</span>
+        </div>
+        <img src="~/css/VaccinesShots.jpg" class="custom-block-image img-fluid" alt="">
+    </div>
+
+    <div class="custom-block bg-white shadow-lg">
+        <div class="d-flex">
+            <div>
+                <h5 class="mb-2">Who does not get vaccinated (Covid-19)? </h5>
+                <p class="mb-0">
+                    You have a history of severe allergic reactions/anaphylaxis to any of the ingredients of the COVID-19 vaccine. You have a fever over 38.5ºC on the day of your vaccine appointment.
+                    Pregnant women who are in their 1st trimester are not advised to get the COVID-19 vaccine at this time.
+                </p>
+            </div>
+            <span class="badge bg-design rounded-pill ms-auto" style="color:black">💡</span>
+        </div>
+        <img src="~/css/kid.jpg" class="custom-block-image img-fluid" alt="">
+    </div>
+
+    <div class="custom-block bg-white shadow-lg ml-auto">
+        <div class="d-flex">
+            <div>
+                <h5 class="mb-2">Vaccine Storage Conditions</h5>
+                <p class="mb-0">Vaccines licensed for refrigerator storage should be stored at 2°C-8°C (36°F-46°F). Liquid vaccines containing an aluminum adjuvant permanently lose potency when exposed to freezing temperatures.</p>
+            </div>
+            <span class="badge bg-design rounded-pill ms-auto" style="color:black">💡</span>
+        </div>
+        <img src="~/css/CareVaccine.jpg" class="custom-block-image img-fluid" alt="">
+    </div>
+</div>
+
+
+
+
+<section class="faq-section section-padding" id="section_4">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-6 col-12">
+                <hr />
+                <h2 class="mb-4" style="color: black">Frequently Asked Questions about Vaccines</h2>
+                <hr />
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="col-lg-5 col-12">
+                <img src="~/css/Elivis.jpg" class="img-fluid" alt="FAQs">
+            </div>
+
+            <div class="col-lg-6 col-12 m-auto">
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                Can a vaccine cause my baby to get sick?
+                            </button>
+                        </h2>
+
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
+                            <div class="accordion-body">
+                                Vaccines are extremely safe and serious side effects are rare. Almost all sickness or discomfort after vaccination is minor and temporary, such as a soreness at the injection site or mild fever. These can often be controlled by taking over-the-counter pain medication as advised by a doctor, or applying a cold cloth to the injection site. If parents are concerned, they should contact their doctor or health care provider.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                What diseases do vaccines prevent?
+                            </button>
+                        </h2>
+
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample" style="">
+                            <div class="accordion-body">
+                                Vaccines protect your child against serious illnesses like polio, which can cause paralysis; measles, which can cause brain swelling and blindness; and tetanus, which can cause painful muscle contractions and difficulty eating and breathing, especially in newborns.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                What is the recommended vaccine schedule?
+                            </button>
+                        </h2>
+
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample" style="">
+                            <div class="accordion-body">
+                                Immunization schedules vary by country depending on which diseases are most prevalent. You can find an overview of the recommended vaccines and approximate dates from your local health centre, doctor or your government’s Ministry of Health.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<script>
+    function myFunction() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+
+
+
+
+
+

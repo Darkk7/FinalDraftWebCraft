@@ -1,0 +1,49 @@
+﻿
+@model VaccineWebApp.Models.VaccinationBookingModel
+
+<head>
+    <link rel="stylesheet" href="~/css/VaccineHome.css" asp-append-version="true" />
+</head>
+
+<form method="post" asp-action="Update">
+    <input asp-for="VaccineBookingID" hidden />
+    <div class="border p-3">
+        <div class="form-group row">
+            <h2 class="text-black-50 pl-3">Update Booking</h2>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group row">
+                   <div class="col-4">
+                        <label asp-for="PatientID">Patient ID: </label>
+                        <input asp-for="PatientID" class="form-control" />
+                   </div>
+
+                  <div class="col-4">
+                    <label asp-for="VaccineID">Vaccine ID: </label>
+                    <input asp-for="VaccineID" class="form-control" />
+                  </div>
+                  <div class="col-4">
+                    <label asp-for="BookingDate">Booking Date: </label>
+                    <input type="datetime" asp-for="BookingDate" class="form-control" />
+                  </div>
+                  <div class="col-4">
+                    <label asp-for="DoseNumber">Vaccine Dose Number:</label>
+                    <input asp-for="DoseNumber" class="form-control" />
+                  </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-8 offset-2 row">
+                    <div class="col">
+                        <input type="submit" class="btn btn-info w-75" value="Update" />
+                    </div>
+                    <div class="col">
+                        <a asp-action="HomeBooking" class="btn btn-danger w-75">Back</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>

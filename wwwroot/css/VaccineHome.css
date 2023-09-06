@@ -1,0 +1,276 @@
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    line-height: 1.6;
+    color: #333;
+    background-image: url('RACGP-Vision-Hero-1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+table {
+    color: black;
+    background-color: grey;
+    border-collapse: collapse;
+}
+
+th {
+    color: black;
+}
+
+td {
+    border-color: black;
+    color: black;
+}
+
+/* Form styles */
+form {
+    width: 100%;
+    max-width: 960px;
+    margin: 60px auto;
+    padding: 35px;
+    background-color: #f9f9f9;
+    border-radius: 35px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+    form h2 {
+        text-align: left;
+        margin-bottom: 20px;
+        font-size: 1.5em;
+        color: black;
+    }
+
+label {
+    display: block;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    color: black;
+    width: 100%;
+}
+
+input[type="text"],
+input[type="date"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.2em;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+input[type="submit"] {
+    background-color: #1c87c9;
+    color: #fff;
+    font-size: 1.2em;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+    input[type="submit"]:hover {
+        background-color: #135f8c;
+
+    }
+
+/* Navigation menu styles */
+nav {
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+    nav ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        text-align: left;
+    }
+
+        nav ul li {
+            display: inline-block;
+        }
+
+            nav ul li a {
+                display: block;
+                color: #fff;
+                text-decoration: none;
+                padding: 10px 20px;
+            }
+
+                nav ul li a:hover {
+                    background-color: #666;
+                }
+
+/* Dropdown menu styles */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    content: "\25BC";
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+    display: none;
+    min-width: 160px;
+    background-color: #fff;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 5px 0;
+}
+
+    .dropdown-menu li a {
+        display: block;
+        color: #333;
+        padding: 10px 20px;
+    }
+
+        .dropdown-menu li a:hover {
+            background-color: #f2f2f2;
+        }
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.right-side {
+    float: right;
+}
+
+    .right-side a {
+        padding: 10px 20px;
+    }
+
+/* Container styles */
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+/* Table styles */
+.table {
+    width: 150%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    position: center;
+}
+
+    .table thead th {
+        background-color: white;
+        color: black;
+        text-align: center;
+        padding: 12px;
+    }
+
+    .table tbody td {
+        background-color: ghostwhite;
+        padding: 18px;
+        border-bottom: 1px solid var(--theme-grey);
+    }
+
+    .table tbody tr:nth-child(even) td {
+        background-color: ghostwhite;
+    }
+
+/* Button styles */
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    margin-right: 10px;
+    border: solid;
+    border-radius: 4px;
+    color: var(--theme-white);
+    background-color: dodgerblue;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+    .btn:hover {
+        background-color: midnightblue;
+        color: antiquewhite;
+    }
+
+.btn-primary {
+    background-color: dodgerblue;
+}
+
+    .btn-primary:hover {
+        background-color: midnightblue;
+        color: antiquewhite;
+    }
+
+.btn-secondary {
+    background-color: #6c757d;
+}
+
+    .btn-secondary:hover {
+        background-color: #555e66;
+    }
+
+/* Heading and paragraph styles */
+.col-md-6 h2.text-primary,
+.form-group.row h2 {
+    color: whitesmoke;
+}
+.sidebar {
+    float: left;
+    width: 250px; /* Adjust the width as needed */
+}
+
+.content {
+    margin-left: 270px; /* Adjust the margin to create space for the sidebar */
+}
+.ajax-file-upload-container .ajax-file-upload-progress, .col, .file-upload .ajax-file-upload-progress {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+}
+.bg-dark {
+    background-color: #212529;
+}
+p {
+    margin-bottom: 10px;
+}
+
+/* Custom block and timeline section styles */
+.col-lg-4 {
+    flex: 0 0 auto;
+    width: 33.33333333%;
+}
+
+.custom-block {
+    border-radius: var(--border-radius-medium);
+    position: relative;
+    overflow: hidden;
+    padding: 30px;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.timeline-section {
+    background-image: url('../images/colleagues-working-cozy-office-medium-shot.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}

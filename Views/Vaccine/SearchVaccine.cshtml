@@ -1,0 +1,33 @@
+﻿@model VaccineWebApp.Models.VaccineModel;
+@{
+    ViewData["Title"] = "searchVaccine";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/VaccineHome.css" asp-append-version="true" />
+</head>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="searchVaccineResult">
+            <h2>Search for Vaccine</h2>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-floating mb-3">
+
+                <input asp-for="Name" class="form-control" aria-required="true" required />
+
+                <label asp-for="Name">Vaccine Name: </label>
+
+            </div>
+          
+            <div class="form-group">
+                <input type="submit" value="Search" class="btn btn-primary"/>
+                <div class="col">
+                    <a asp-action="HomeVaccine" class="btn btn-danger w-75">Back</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

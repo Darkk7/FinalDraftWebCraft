@@ -1,0 +1,106 @@
+﻿@model VaccineWebApp.Models.VaccineModel
+
+<head>
+    <link rel="stylesheet" href="~/css/VaccineHome.css" asp-append-version="true" />
+</head>
+
+
+<form method="post" asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="border p-3">
+        <div class="form-group row">
+            <h2 class="text-black-50 pl-3">Add New Vaccine</h2>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group row">
+                    <div class="form-floating mb-3">
+
+                        <input asp-for="Name" class="form-control" aria-required="true" />
+
+                        <label asp-for="Name">Vaccine Name: </label>
+
+                    </div>
+
+
+                    <div class="form-floating mb-3">
+
+                        <input asp-for="DosesNeeded" class="form-control" aria-required="true" />
+
+                        <label asp-for="DosesNeeded">DosesNeeded:</label>
+                     
+
+                    </div>
+
+                    <div class="form-floating mb-3">
+
+
+                        <input asp-for="Quantity" class="form-control" aria-required="true" />
+
+                        <label asp-for="Quantity">Vaccine Quantity:</label>
+
+
+                    </div>
+
+
+                    <div class="form-floating mb-3">
+
+                        <input asp-for="LowQuantity" class="form-control" aria-required="true" />
+
+                        <label asp-for="LowQuantity">Low Quantity: </label>
+
+                    </div>
+
+                    <div class="form-floating mb-3">
+
+                        <input asp-for="TypeName" class="form-control" aria-required="true" />
+
+                        <label asp-for="TypeName">Vaccine Type: </label>
+
+                    </div>
+
+                    <div class="form-floating mb-3">
+
+
+                        <div class="form-floating mb-3">
+
+                            <input asp-for="MedAidNo" class="form-control" aria-required="true" />
+
+                            <label asp-for="MedAidNo">Medical Aid Accepted:</label>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-floating mb-3">
+
+                        <div class="form-floating mb-3">
+
+                            <input asp-for="Price" class="form-control" aria-required="true" />
+
+                            <label asp-for="Price">Vaccine Price:</label>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group row">
+                <div class="col-8 offset-2 row">
+                    <div class="col">
+                        <input type="submit" class="btn btn-info w-75" value="Add" />
+                    </div>
+                    <div class="col">
+                        <a asp-action="HomeVaccine" class="btn btn-danger w-75">Back</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+
+
+
