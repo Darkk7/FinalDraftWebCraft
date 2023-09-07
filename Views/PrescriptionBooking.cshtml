@@ -1,0 +1,113 @@
+﻿@model PrescriptionBookingModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+
+    <section class="my-4">
+        <div class="py-4">
+            <h2 class="text-center">Prescription_Booking</h2>
+            <div class="w-50 m-auto">
+                
+                <form action="PrescriptionBooking" method="POST">
+                   
+
+
+                    <div class="form-group">
+
+                        <label for="booking_id">BookingID:</label><br>
+                        <input type="text" id="booking_id" name="booking_id" required><br>
+                    </div>
+
+
+                    <label for="patient_id">Patient ID:</label><br>
+                    <input type="text" id="patient_id" name="patient_id" required><br><br>
+
+
+
+                    <label for="date">Date:</label><br>
+                    <input type="datetime-local" id="datetime" name="datetime" required><br><br>
+
+
+                    <label for="prescription_end_date">Prescription End date:</label><br>
+                    <input type="datetime-local" id="datetime" name="datetime" required><br><br>
+
+
+
+                    <label for="reason">Reason for Appointment:</label><br>
+                    <textarea id="reason" name="reason"></textarea><br><br>
+
+
+
+                    <label for="MedicationName">Medication Name:</label><br>
+                    <input type="text" id="MedicationName" name="MedicationName" required><br><br>
+
+
+
+                    <label for="total_amount">Total Amount:</label><br>
+                    <input type="number" id="currency" name="currency" required><br><br>
+
+                    <input type="submit" value="Submit">
+
+                   
+
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

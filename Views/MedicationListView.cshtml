@@ -1,0 +1,59 @@
+﻿@model MedicationListModel
+
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+
+    <section class="my-4">
+        <div class="py-4">
+            <h2 class="text-center">Medication_List</h2>
+            <div class="w-50 m-auto">
+                <form action="MedicationList" method="POST">
+                    <div class="form-group">
+
+                        <label for="medication_id">MedicationdID:</label><br>
+                        <input type="text" id="medication_id" name="medication_id" required><br>
+                    </div>
+
+
+                    <label for="name">Name:</label><br>
+                    <input type="text" id="name" name="name" required><br><br>
+
+                    <label for="quantity">Quantity:</label><br>
+                    <input type="text" id="quantity" name="quantity" required><br><br>
+
+                    <label for="low_quantity">Low_Quantity:</label><br>
+                    <input type="text" id="low_quantity" name="low_quantity" required><br><br>
+
+                    <label for="type">Type:</label><br>
+                    <input type="text" id="type" name="type" required><br><br>
+
+
+                     <label for="price">Price:</label><br>
+                    <input type="text" id="price" name="price" required><br><br>
+
+
+
+                    <label for="brandName">Brand Name:</label><br>
+                    <input type="text" id="brandName" name="brandName" required><br><br>
+
+
+
+                    <label for="MedAid">Medical Aid:</label><br>
+                    <input type="text" id="MedAid" name="MedAid"><br><br>
+
+                    <div class="form-group">
+                        <input type="submit" value="Submit" class="btn btn-primary" />
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+
+</body>
+</html>
+
