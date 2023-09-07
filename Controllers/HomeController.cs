@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Chronic_Medication_system.Models;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using VaccineWebApp.Models;
 
-namespace VaccineWebApp.Controllers
+namespace Chronic_Medication_system.Controllers
 {
     public class HomeController : Controller
     {
@@ -13,15 +13,20 @@ namespace VaccineWebApp.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult CMHomepage1()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult AboutUs()
         {
             return View();
         }
+        public IActionResult ContactUs()
+        {
+            return View();
+        }
+     
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
