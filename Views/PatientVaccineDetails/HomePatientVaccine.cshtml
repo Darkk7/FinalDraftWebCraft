@@ -1,13 +1,12 @@
 ﻿@model IEnumerable<VaccineWebApp.Models.PatientVaccineDetails>
 
-<!DOCTYPE html>
-<html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>List of Patient and Vaccines</title>
     <link rel="stylesheet" href="~/css/VaccineHome.css" asp-append-version="true" />
 </head>
+
 <body>
     <div class="container p-3">
         <div class="row pt-4">
@@ -17,6 +16,7 @@
                 <hr />
             </div>
             <div class="col-6 text-right">
+                <a class="btn btn-outline-primary-light" id="btnDashboard" asp-controller="Vaccine" asp-action="Dashboard">Display Dashboard</a>
                 <a asp-controller="PatientVaccineDetails" asp-action="Create" class="btn btn-primary">Add New Vaccine and Patient Details</a>
             </div>
         </div>
@@ -61,6 +61,7 @@
                 <p>No Patient and Vaccine details added</p>
         }
     </div>
+</body>
 
 
 
@@ -87,7 +88,6 @@
                             <a class="btn btn-outline-primary-light" id="btnVaccine" asp-controller="Vaccine" asp-action="HomeVaccine">
                                 Display Available Vaccines
                             </a>
-
                         </td>
                         <td class="text-center border-right pt-3" width="33%">
                             <h3 class="text-transform-none">Vaccine Types</h3>
