@@ -274,3 +274,30 @@ p {
     background-size: cover;
     position: relative;
 }
+
+.chart-container {
+    background-color: #f0f0f0; /* Grey background color */
+    width: 95%; /* Take up the full width of the column */
+    height: 350px; /* Set the desired height */
+    padding: 10px; /* Optional padding for spacing */
+    border: 1px solid #ccc; /* Optional border */
+    border-radius: 5px; /* Optional border radius */
+}
+.booking-count {
+    background-color: #f2f2f2; /* Background color */
+    padding: 20px; /* Padding for spacing */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Box shadow for depth */
+    text-align: center; /* Center-align content */
+}
+
+    .booking-count h4 {
+        font-size: 18px; /* Header font size */
+        margin-bottom: 10px; /* Spacing below header */
+    }
+
+    .booking-count p {
+        font-size: 24px; /* Booking count font size */
+        font-weight: bold; /* Bold booking count text */
+        color: #007bff; /* Text color (blue) */
+    }

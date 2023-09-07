@@ -1,0 +1,169 @@
+﻿@model IEnumerable<VaccineWebApp.Models.VaccineModel>
+
+<head>
+    <link rel="stylesheet" href="~/css/VaccineHome.css" asp-append-version="true" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <hr />
+    <h2 style="color: black">Welcome to the Vaccine Dashboard</h2>
+    <hr />
+</head>
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="chart-container">
+                <canvas id="vaccineChart">
+                    <p>Quantity remaining of each Vaccine</p>
+                </canvas>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="booking-count">
+                <h4>Bookings for Today:</h4>
+                <p>@ViewBag.BookingCount</p>
+            </div>
+        </div>
+
+        @if (!string.IsNullOrEmpty(ViewBag.LowQuantityAlert))
+        {
+            <div class="alert alert-danger mt-3">
+                @Html.Raw(ViewBag.LowQuantityAlert)
+            </div>
+        }
+    </div>
+</div>
+
+<hr />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card my-3" id="patient-portal-dashboard-card-useful-links">
+                <div class="card-header">
+                    <h2>Useful Links</h2>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table w-100 table-dashboard-middle">
+                        <tbody>
+                            <tr height="50%" width="100%">
+                                <td class="text-center border-right pt-3">
+                                    <h3 class="text-transform-none">Vaccine Bookings</h3>
+                                    <p>To display the Vaccine Bookings that were made for patients</p>
+                                    <a class="btn btn-outline-primary-light" id="btnVaccineBooking" asp-controller="VaccineBooking" asp-action="HomeBooking">
+                                        Display Vaccine Bookings
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card my-3" id="patient-portal-dashboard-card-useful-links">
+                <div class="card-header">
+                    <h2>To Browse</h2>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table w-100 table-dashboard-middle">
+                        <tbody>
+                            <tr height="50%" width="100%">
+                                <td class="text-center border-right pt-3">
+                                    <h3 class="text-transform-none">Vaccines</h3>
+                                    <p>All the different vaccines offered at the facility are found here</p>
+                                    <a class="btn btn-outline-primary-light" id="btnVaccine" asp-controller="Vaccine" asp-action="HomeVaccine">
+                                        Display Available Vaccines
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card my-3" id="patient-portal-dashboard-card-useful-links">
+                <div class="card-header">
+                    <h2>& Use The</h2>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table w-100 table-dashboard-middle">
+                        <tbody>
+                            <tr height="50%" width="100%">
+                                <td class="text-center border-right pt-3">
+                                    <h3 class="text-transform-none">Vaccine Types</h3>
+                                    <p>Find the different vaccine types offered at the facility here</p>
+                                    <a class="btn btn-outline-primary-light" id="btnVaccineType" asp-controller="VaccineType" asp-action="HomeVaccineType">
+                                        Display Vaccine Types
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card my-3" id="patient-portal-dashboard-card-useful-links">
+                <div class="card-header">
+                    <h2>System</h2>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table w-100 table-dashboard-middle">
+                        <tbody>
+                            <tr height="50%" width="100%">
+                                <td class="text-center pt-3">
+                                    <h3 class="text-transform-none">Patient & Vaccine Details</h3>
+                                    <p>To check whether a patient has received a specific vaccine at the facility before</p>
+                                    <a class="btn btn-outline-primary-light" id="btnPatientVac" asp-controller="PatientVaccineDetails" asp-action="HomePatientVaccine">
+                                        Display Patient and Vaccine Details
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var vaccineData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model));
+    var ctx = document.getElementById('vaccineChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: vaccineData.map(v => v.Name),
+            datasets: [{
+                data: vaccineData.map(v => v.Quantity),
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.7)',
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(255, 206, 86, 0.7)',
+                    'rgba(75, 192, 192, 0.7)',
+                    'rgba(153, 102, 255, 0.7)',
+                    'rgba(255, 159, 64, 0.7)'
+                ]
+            }]
+        },
+        options: {
+            responsive: false, /* Disable responsiveness to keep it static */
+            plugins: {
+                datalabels: {
+                    color: '#333', // Text color
+                    anchor: 'end', // Position of the value relative to the pie slice
+                    align: 'start', // Alignment of the value text
+                    font: {
+                        size: 12, // Font size of the value text
+                        weight: 'bold' // Font weight of the value text
+                    },
+                    formatter: function (value, context) {
+                        return value; // Display the quantity as the value on the slice
+                    }
+                }
+            }
+        }
+    });
+</script>

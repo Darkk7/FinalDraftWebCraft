@@ -1,4 +1,4 @@
-namespace Chronic_Medication_system.Models
+namespace VaccineWebApp.Models
 {
     public class ErrorViewModel
     {

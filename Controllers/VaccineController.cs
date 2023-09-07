@@ -4,13 +4,14 @@ using VaccineWebApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.SqlClient;
 using System.Data;
+using System.Globalization;
 
 namespace VaccinationSubsytem.Controllers
 {
     public class VaccineController : Controller
     {
         private readonly ApplicationDbContext dbContext;
-        public string ConnectionString = "Server=LAPTOP-TEOTC2HU;Database=GRP-03-07-WebCraft;Trusted_Connection=True";
+        public string ConnectionString = "Server=SICT-SQL.mandela.ac.za;Database=GRP-03-07-WebCraft;User ID=GRP-03-07;pwd=grp-03-07-soit2023;Trusted_Connection=False;";
 
 
         public VaccineController(ApplicationDbContext dBD)
@@ -107,21 +108,23 @@ namespace VaccinationSubsytem.Controllers
 
         public IActionResult VaccineDetails()
         {
-            int vaccineID = Convert.ToInt32(TempData["VaccineID"]);
-            ViewBag.VaccineName = TempData["Name"];
-            ViewBag.DosesNeeded = TempData["DosesNeeded"];
-            ViewBag.Quantity = TempData["Quantity"];
-            ViewBag.LowQuantity = TempData["LowQuantity"];
-            ViewBag.TypeName = TempData["TypeName"];
-            ViewBag.MedAidNo = TempData["PatientMedAidNo"];
-            ViewBag.Price = TempData["Price"];
-            
+            int? vaccineID = TempData["VaccineID"] as int?;
+            if (vaccineID != null)
+            {
+                ViewBag.VaccineName = TempData["Name"];
+                ViewBag.DosesNeeded = TempData["DosesNeeded"];
+                ViewBag.Quantity = TempData["Quantity"];
+                ViewBag.LowQuantity = TempData["LowQuantity"];
+                ViewBag.TypeName = TempData["TypeName"];
+                ViewBag.MedAidNo = TempData["PatientMedAidNo"];
+                ViewBag.Price = TempData["Price"];
+            }
+
             TempData.Clear();
 
-
             return View();
-
         }
+
 
         public IActionResult Delete(int? ID)
         {
@@ -136,5 +139,87 @@ namespace VaccinationSubsytem.Controllers
             dbContext.SaveChanges();
             return RedirectToAction("HomeVaccine");
         }
+
+
+        public ActionResult Dashboard()
+        {
+            List<VaccineModel> vaccines = dbContext.vaccine.ToList();
+
+            int totalQuantity = vaccines.Sum(v => v.Quantity);
+
+            // Check if there's a low quantity alert message in TempData
+            string lowQuantityAlert = TempData["LowQuantityAlert"] as string;
+
+            if (!string.IsNullOrEmpty(lowQuantityAlert))
+            {
+                ViewBag.LowQuantityAlert = lowQuantityAlert;
+
+                // Clear the alert from TempData to prevent it from displaying multiple times
+                TempData.Remove("LowQuantityAlert");
+            }
+
+            // Get the booking count for today (you can replace "DateTime.Now.Date" with your desired date)
+            var today = DateTime.Now.Date;
+
+            // Retrieve the bookings for today from the database
+            var todayBookings = dbContext.vaccineBookings.ToList();
+
+            // Filter and count the bookings for the specified date
+            var bookingCount = todayBookings
+                .Count(vb =>
+                {
+                    DateTime bookingDateDb;
+                    return DateTime.TryParseExact(vb.BookingDate, "yyyy-MM-ddTHH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out bookingDateDb) &&
+                           bookingDateDb >= today && bookingDateDb < today.AddDays(1);
+                });
+
+            ViewBag.TotalQuantity = totalQuantity;
+            ViewBag.BookingCount = bookingCount;
+
+            return View(vaccines);
+        }
+
+
+
+        // Add this method to update vaccine quantity when a booking is made
+        [HttpPost]
+        public IActionResult UpdateVaccineQuantity(int vaccineId, int doseNumber)
+        {
+            var vaccine = dbContext.vaccine.Find(vaccineId);
+
+            if (vaccine != null)
+            {
+                // Check if there are enough vaccines in stock
+                if (vaccine.Quantity >= doseNumber)
+                {
+                    // Decrement the vaccine quantity
+                    vaccine.Quantity -= doseNumber;
+
+                    // Update the vaccine quantity in the database
+                    dbContext.vaccine.Update(vaccine);
+
+                    // Save changes to the database
+                    dbContext.SaveChanges();
+
+                    // Check if the quantity is now below the low quantity threshold
+                    if (vaccine.Quantity <= vaccine.LowQuantity)
+                    {
+                        // Create an alert message or log the alert as needed
+                        string alertMessage = $"Low quantity alert for {vaccine.Name}. Current quantity: {vaccine.Quantity}";
+
+                        // You can store this alert message in a database or a log file for future reference
+
+                        // For now, let's use TempData to pass the alert message to the Dashboard
+                        TempData["LowQuantityAlert"] = alertMessage;
+                    }
+
+                    return RedirectToAction("Dashboard");
+                }
+            }
+
+            return RedirectToAction("Dashboard");
+        }
+
+
     }
 }

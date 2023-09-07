@@ -4,29 +4,31 @@ using VaccineWebApp.Models;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System.Data;
+using System;
+using System.Globalization; 
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.IO;
 
-
 namespace VaccineWebApp.Controllers
 {
     public class VaccineBookingController : Controller
     {
         private readonly ApplicationDbContext dbContext;
-        public string ConnectionString = "Server=LAPTOP-TEOTC2HU;Database=GRP-03-07-WebCraft;Trusted_Connection=True";
+        public string ConnectionString = "Server=SICT-SQL.mandela.ac.za;Database=GRP-03-07-WebCraft;User ID=GRP-03-07;pwd=grp-03-07-soit2023;Trusted_Connection=False;";
 
         public VaccineBookingController(ApplicationDbContext dBD)
         {
             dbContext = dBD;
         }
 
-
         public IActionResult HomeBooking()
         {
-            IEnumerable<VaccinationBookingModel> objList = dbContext.vaccineBookings;
+            IEnumerable<VaccinationBookingModel> objList = dbContext.vaccineBookings
+
+                .Include(vb => vb.Vaccine);
             return View(objList);
         }
 
@@ -41,9 +43,38 @@ namespace VaccineWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                dbContext.vaccineBookings.Add(vaccineBooking);
-                dbContext.SaveChanges();
-                return RedirectToAction("HomeBooking");
+                // Find the vaccine associated with the booking
+                var vaccine = dbContext.vaccine.Find(vaccineBooking.VaccineID);
+
+                if (vaccine != null)
+                {
+                    // Check if there are enough vaccines in stock
+                    if (vaccine.Quantity >= vaccineBooking.DoseNumber)
+                    {
+                        // Decrement the total quantity of vaccines
+                        vaccine.Quantity -= vaccineBooking.DoseNumber;
+
+                        // Update the vaccine quantity in the database
+                        dbContext.vaccine.Update(vaccine);
+
+                        // Save changes to the database
+                        dbContext.SaveChanges();
+
+                        // Create the booking
+                        dbContext.vaccineBookings.Add(vaccineBooking);
+                        dbContext.SaveChanges();
+
+                        return RedirectToAction("HomeBooking");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Not enough vaccines in stock.");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Vaccine not found.");
+                }
             }
             return View(vaccineBooking);
         }
@@ -75,8 +106,6 @@ namespace VaccineWebApp.Controllers
             }
         }
 
-       
-
         public IActionResult Update(int? ID)
         {
             if (ID == null || ID == 0)
@@ -90,7 +119,6 @@ namespace VaccineWebApp.Controllers
             }
 
             return View(obj);
-
         }
 
         [HttpPost]
@@ -119,5 +147,32 @@ namespace VaccineWebApp.Controllers
         {
             return View();
         }
+
+        public IActionResult CountBookingsForDay(string date)
+        {
+            // Parse the date string to a DateTime object
+            if (DateTime.TryParseExact(date, "yyyy-MM-ddTHH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime bookingDate))
+            {
+                // Calculate the start and end of the day for comparison
+                DateTime startOfDay = bookingDate.Date;
+                DateTime endOfDay = startOfDay.AddDays(1);
+
+                // Retrieve data from the database
+                var bookingsForDate = dbContext.vaccineBookings.ToList();
+
+                // Filter and count the bookings for the specified date
+                int bookingCount = bookingsForDate
+                    .Count(vb => DateTime.TryParseExact(vb.BookingDate, "yyyy-MM-ddTHH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime bookingDateDb) &&
+                                 bookingDateDb >= startOfDay && bookingDateDb < endOfDay);
+
+                return Json(new { Date = date, BookingCount = bookingCount });
+            }
+
+            return Json(new { Error = "Invalid date format" });
+        }
+
+
+
+
     }
 }

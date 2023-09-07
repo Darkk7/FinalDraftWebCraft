@@ -1,14 +1,17 @@
 ﻿@model IEnumerable<VaccineWebApp.Models.VaccineTypeModel>
-<link rel="stylesheet" href="~/css/VaccineHome.css" asp-append-version="true" />
+
+<head>
+    <link rel="stylesheet" href="~/css/VaccineHome.css" asp-append-version="true" />
+</head>
 
 <div class="container p-3">
     <div class="row pt-4">
-        <div class="col-6">
+        <div class="col-md-6">
             <hr />
             <h2 style="color: black">List of Vaccine Types</h2>
-            <hr/>
+            <hr />
         </div>
-        <div class="col-6 text-right">
+        <div class="col-md-6 text-right">
             <a asp-controller="VaccineType" asp-action="Create" class="btn btn-primary">Add New Vaccine Type</a>
         </div>
     </div>
@@ -20,33 +23,24 @@
         <table id="myTable" class="table table-bordered table-striped" style="width:100%">
             <thead>
                 <tr>
-                    <th>
-                        Vaccine Type Name
-                    </th>
-                    <th>
-                        Description
-                    </th>
-                    <th>
-                        Update Vaccine Type
-                    </th>
-                    <th>
-                        Delete Vaccine Type
-                    </th>
+                    <th>Vaccine Type Name</th>
+                    <th>Description</th>
+                    <th>Update Vaccine Type</th>
+                    <th>Delete Vaccine Type</th>
                 </tr>
             </thead>
-
             <tbody>
                 @foreach (var vaccineType in Model)
                 {
                     <tr>
-                        <td width="30%">@vaccineType.TypeName</td>
-                        <td width="30%">@vaccineType.Description</td>
-                        <td width="10%" style="text-align: right;">
+                        <td>@vaccineType.TypeName</td>
+                        <td>@vaccineType.Description</td>
+                        <td style="text-align: right;">
                             <div class="btn-group" role="group">
-                                <a asp-controller="VaccineType" asp-action="Update" asp-route-ID="@vaccineType.TypeID" class="btn btn-primary" >Update Vaccine Type</a>
+                                <a asp-controller="VaccineType" asp-action="Update" asp-route-ID="@vaccineType.TypeID" class="btn btn-primary">Update Vaccine Type</a>
                             </div>
                         </td>
-                        <td width="10%" style="text-align: left;">
+                        <td style="text-align: left;">
                             <div class="btn-group" role="group">
                                 <a asp-controller="VaccineType" asp-action="Delete" asp-route-ID="@vaccineType.TypeID" class="btn btn-primary">🗑</a>
                             </div>
@@ -55,14 +49,13 @@
                 }
             </tbody>
         </table>
-
     }
     else
     {
         <p>No Vaccine Types were added yet</p>
     }
-
 </div>
+
 <hr />
 <div class="col">
     <div class="card my-3" id="patient-portal-dashboard-card-useful-links">

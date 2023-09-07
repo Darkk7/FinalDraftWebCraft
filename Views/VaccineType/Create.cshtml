@@ -1,52 +1,31 @@
 ﻿@model VaccineWebApp.Models.VaccineTypeModel
+
 <head>
     <link rel="stylesheet" href="~/css/VaccineHome.css" asp-append-version="true" />
 </head>
 
 <body>
-  <div class="container">
-      <div class="row justify-content-center">
-
-        <div class="col-md-3">
-
-            <form method="post" asp-action="Create" style="width: 500px">
-
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-                <h2 class="mb-4 text-center">Add New Vaccine Type</h2>
-
-                <hr />
-
-                <div class="form-floating mb-3">
-
-                    <input asp-for="TypeName" class="form-control" aria-required="true" />
-
-                    <label asp-for="TypeName">Vaccine Type Name: </label>
-
-                </div>
-
-                <div class="form-floating mb-3">
-
-                    <input asp-for="Description" class="form-control" aria-required="true" required />
-
-                    <label asp-for="Description">Description: </label>
-
-                </div>
-
-                <div class="col-8 offset-2 row">
-                        <div class="col">
-                            <input type="submit" class="btn btn-info w-75" value="Add" />
-                        </div>
-                    <div class="col">
-                        <a asp-action="HomeVaccineType" class="btn btn-danger w-75">Back</a>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form method="post" asp-action="Create" style="max-width: 500px">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <h2 class="mb-4 text-center">Add New Vaccine Type</h2>
+                    <hr />
+                    <div class="mb-3">
+                        <label asp-for="TypeName" class="form-label">Vaccine Type Name:</label>
+                        <input asp-for="TypeName" class="form-control" required />
                     </div>
-                </div>
-
-            </form>
-
+                    <div class="mb-3">
+                        <label asp-for="Description" class="form-label">Description:</label>
+                        <input asp-for="Description" class="form-control" required />
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-info">Add</button>
+                        <a asp-action="HomeVaccineType" class="btn btn-danger">Back</a>
+                    </div>
+                </form>
+            </div>
         </div>
-
-      </div>
-  </div>
+    </div>
 </body>
-

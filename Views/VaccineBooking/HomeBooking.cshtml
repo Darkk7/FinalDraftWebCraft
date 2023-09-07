@@ -1,16 +1,19 @@
-﻿@model IEnumerable<VaccineWebApp.Models.VaccinationBookingModel>
+﻿
+@model IEnumerable<VaccineWebApp.Models.VaccinationBookingModel>
 
-<link rel="stylesheet" href="~/css/VaccineHome.css" asp-append-version="true" />
+<head>
+    <link rel="stylesheet" href="~/css/VaccineHome.css" asp-append-version="true" />
+</head>
 
 <div class="container p-3">
     <div class="row pt-4">
         <div class="col-md-6">
             <hr />
-            <h2 style="color:black">List of Booking</h2>
+            <h2 style="color: black">List of Booking</h2>
             <hr />
         </div>
         <div class="col-md-6 text-right">
-            <a asp-controller="VaccineBooking" asp-action="Create" class="btn btn-primary" >Add a new Booking</a>
+            <a asp-controller="VaccineBooking" asp-action="Create" class="btn btn-primary">Add a new Booking</a>
         </div>
     </div>
     <br />
@@ -21,27 +24,14 @@
         <table id="myTable" class="table table-bordered table-striped" style="width:100%">
             <thead>
                 <tr>
-                    <th>
-                        Patient Name
-                    </th>
-                    <th>
-                        Vaccine Name
-                    </th>
-                    <th>
-                        Booking Date
-                    </th>
-                    <th>
-                        Vaccine Dose Number
-                    </th>
-                     <th>
-                        Update Booking
-                    </th>
-                    <th>
-                        Delete Booking
-                    </th>
+                    <th>Patient Name</th>
+                    <th>Vaccine Name</th>
+                    <th>Booking Date</th>
+                    <th>Vaccine Dose Number</th>
+                    <th>Update Booking</th>
+                    <th>Delete Booking</th>
                 </tr>
             </thead>
-
             <tbody>
                 @foreach (var vaccinationBooking in Model)
                 {
@@ -60,19 +50,15 @@
                                 <a asp-controller="VaccineBooking" asp-action="Delete" asp-route-ID="@vaccinationBooking.VaccineBookingID" class="btn btn-primary">🗑</a>
                             </div>
                         </td>
-
                     </tr>
                 }
             </tbody>
-
         </table>
-
     }
     else
     {
         <p>No booking have been added</p>
     }
-
 </div>
 
 <hr />
@@ -89,24 +75,17 @@
                         <td class="text-center border-right pt-3" width="33%">
                             <h3 class="text-transform-none">Vaccine Types</h3>
                             <p>Find the Different Vaccine Types offered at the Facility here</p>
-                            <a class="btn btn-outline-primary-light" id="btnVaccineType" asp-controller="VaccineType" asp-action="HomeVaccineType">
-                                Display Vaccine Types
-                            </a>
+                            <a class="btn btn-outline-primary-light" id="btnVaccineType" asp-controller="VaccineType" asp-action="HomeVaccineType">Display Vaccine Types</a>
                         </td>
                         <td class="text-center border-right pt-3" width="33%">
                             <h3 class="text-transform-none">Vaccines</h3>
                             <p>All the Different Vaccine offered at the Facility are found here </p>
-                            <a class="btn btn-outline-primary-light" id="btnVaccine" asp-controller="Vaccine" asp-action="HomeVaccine">
-                                Display Available Vaccines
-                            </a>
-
+                            <a class="btn btn-outline-primary-light" id="btnVaccine" asp-controller="Vaccine" asp-action="HomeVaccine">Display Available Vaccines</a>
                         </td>
                         <td class="text-center pt-3" width="33%">
                             <h3 class="text-transform-none">Patient & Vaccine Details</h3>
-                            <p>To check whether a patient has recieved a Specific Vaccine at the facility before </p>
-                            <a class="btn btn-outline-primary-light" id="btnPatientVac" asp-controller="PatientVaccineDetails" asp-action="HomePatientVaccine">
-                                Display Patient and Vaccine Details
-                            </a>
+                            <p>To check whether a patient has received a Specific Vaccine at the facility before </p>
+                            <a class="btn btn-outline-primary-light" id="btnPatientVac" asp-controller="PatientVaccineDetails" asp-action="HomePatientVaccine">Display Patient and Vaccine Details</a>
                         </td>
                     </tr>
                 </tbody>
@@ -118,50 +97,49 @@
 <hr />
 
 <div class="d-flex mb-4 mb-lg-0">
-    <div class="custom-block bg-white shadow-lg">
-        <div class="d-flex">
-            <div>
-                <h5 class="mb-2"> Use this service to:</h5>
-                <p class="mb-0">
-                    Book a Vaccine Slot
-                    Check existing appointment details
-                    Change appointments
-                    Delete appointments
-                </p>
+    <div class="d-flex mb-4 mb-lg-0">
+        <div class="custom-block bg-white shadow-lg">
+            <div class="d-flex">
+                <div>
+                    <h5 class="mb-2"> Use this service to:</h5>
+                    <p class="mb-0">
+                        Book a Vaccine Slot
+                        Check existing appointment details
+                        Change appointments
+                        Delete appointments
+                    </p>
+                </div>
+                <span class="badge bg-design rounded-pill ms-auto" style="color:black">💡</span>
             </div>
-            <span class="badge bg-design rounded-pill ms-auto" style="color:black">💡</span>
+            <img src="~/css/VaccinesShots.jpg" class="custom-block-image img-fluid" alt="">
         </div>
-        <img src="~/css/VaccinesShots.jpg" class="custom-block-image img-fluid" alt="">
-    </div>
 
-    <div class="custom-block bg-white shadow-lg">
-        <div class="d-flex">
-            <div>
-                <h5 class="mb-2">Who does not get vaccinated (Covid-19)? </h5>
-                <p class="mb-0">
-                    You have a history of severe allergic reactions/anaphylaxis to any of the ingredients of the COVID-19 vaccine. You have a fever over 38.5ºC on the day of your vaccine appointment.
-                    Pregnant women who are in their 1st trimester are not advised to get the COVID-19 vaccine at this time.
-                </p>
+        <div class="custom-block bg-white shadow-lg">
+            <div class="d-flex">
+                <div>
+                    <h5 class="mb-2">Who does not get vaccinated (Covid-19)? </h5>
+                    <p class="mb-0">
+                        You have a history of severe allergic reactions/anaphylaxis to any of the ingredients of the COVID-19 vaccine. You have a fever over 38.5ºC on the day of your vaccine appointment.
+                        Pregnant women who are in their 1st trimester are not advised to get the COVID-19 vaccine at this time.
+                    </p>
+                </div>
+                <span class="badge bg-design rounded-pill ms-auto" style="color:black">💡</span>
             </div>
-            <span class="badge bg-design rounded-pill ms-auto" style="color:black">💡</span>
+            <img src="~/css/kid.jpg" class="custom-block-image img-fluid" alt="">
         </div>
-        <img src="~/css/kid.jpg" class="custom-block-image img-fluid" alt="">
-    </div>
 
-    <div class="custom-block bg-white shadow-lg ml-auto">
-        <div class="d-flex">
-            <div>
-                <h5 class="mb-2">Vaccine Storage Conditions</h5>
-                <p class="mb-0">Vaccines licensed for refrigerator storage should be stored at 2°C-8°C (36°F-46°F). Liquid vaccines containing an aluminum adjuvant permanently lose potency when exposed to freezing temperatures.</p>
+        <div class="custom-block bg-white shadow-lg ml-auto">
+            <div class="d-flex">
+                <div>
+                    <h5 class="mb-2">Vaccine Storage Conditions</h5>
+                    <p class="mb-0">Vaccines licensed for refrigerator storage should be stored at 2°C-8°C (36°F-46°F). Liquid vaccines containing an aluminum adjuvant permanently lose potency when exposed to freezing temperatures.</p>
+                </div>
+                <span class="badge bg-design rounded-pill ms-auto" style="color:black">💡</span>
             </div>
-            <span class="badge bg-design rounded-pill ms-auto" style="color:black">💡</span>
+            <img src="~/css/CareVaccine.jpg" class="custom-block-image img-fluid" alt="">
         </div>
-        <img src="~/css/CareVaccine.jpg" class="custom-block-image img-fluid" alt="">
     </div>
 </div>
-
-
-
 
 <section class="faq-section section-padding" id="section_4">
     <div class="container">
@@ -228,6 +206,7 @@
         </div>
     </div>
 </section>
+
 <script>
     function myFunction() {
         // Declare variables
@@ -251,8 +230,6 @@
         }
     }
 </script>
-
-
 
 
 

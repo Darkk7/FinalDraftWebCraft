@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\VaccineWebApp.props" />
+</Project>
