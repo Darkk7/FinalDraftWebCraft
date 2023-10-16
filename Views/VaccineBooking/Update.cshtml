@@ -1,10 +1,14 @@
-﻿@model VaccineWebApp.Models.VaccinationBookingModel
+﻿@model VaccineProject.Models.VaccinationBookingModel
 
+<!DOCTYPE html>
+<html>
 <head>
+    <!-- Include the stylesheet for VaccineHome.css -->
     <link rel="stylesheet" href="~/css/VaccineHome.css" asp-append-version="true" />
 </head>
 
-<form method="post" asp-action="Update">
+<form method="post" asp-action="Update" onsubmit="showSpinnerAndSubmit()">
+    <!-- Hidden field for VaccineBookingID -->
     <input asp-for="VaccineBookingID" hidden />
     <div class="border p-3">
         <div class="form-group row">
@@ -14,19 +18,23 @@
             <div class="col-12">
                 <div class="form-group row">
                     <div class="col-4">
-                        <label asp-for="PatientID">Patient ID: </label>
-                        <input asp-for="PatientID" class="form-control" />
+                        <label asp-for="PatientFullName" style="color: grey">Patient Full Name:</label>
+                        <input asp-for="PatientFullName" class="form-control" />
                     </div>
                     <div class="col-4">
-                        <label asp-for="VaccineID">Vaccine ID: </label>
-                        <input asp-for="VaccineID" class="form-control" />
+                        <label asp-for="NurseFullName" style="color: grey">Nurse/Doctor Full Name:</label>
+                        <input asp-for="NurseFullName" class="form-control" />
                     </div>
                     <div class="col-4">
-                        <label asp-for="BookingDate">Booking Date: </label>
+                        <label asp-for="VaccineName" style="color: grey">Vaccine Name:</label>
+                        <input asp-for="VaccineName" class="form-control" />
+                    </div>
+                    <div class="col-4">
+                        <label asp-for="BookingDate" style="color: grey">Booking Date:</label>
                         <input asp-for="BookingDate" type="datetime-local" class="form-control" />
                     </div>
                     <div class="col-4">
-                        <label asp-for="DoseNumber">Vaccine Dose Number:</label>
+                        <label asp-for="DoseNumber" style="color: grey">Vaccine Doses:</label>
                         <input asp-for="DoseNumber" class="form-control" />
                     </div>
                 </div>
@@ -34,9 +42,11 @@
             <div class="form-group row">
                 <div class="col-8 offset-2 row">
                     <div class="col">
+                        <!-- Submit button for updating the booking -->
                         <input type="submit" class="btn btn-info w-75" value="Update" />
                     </div>
                     <div class="col">
+                        <!-- Cancel button to go back to the booking home -->
                         <a asp-action="HomeBooking" class="btn btn-danger w-75">Back</a>
                     </div>
                 </div>

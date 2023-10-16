@@ -1,0 +1,91 @@
+﻿@model IEnumerable<VaccineProject.Models.OrderModel>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="~/css/VaccineHome.css" asp-append-version="true" />
+</head>
+
+<body>
+    <div class="container p-3">
+        <div class="row pt-4">
+            <div class="col-md-6">
+                <hr />
+                <h2 style="color: black">List of Orders</h2>
+                <hr />
+            </div>
+            <div class="col-md-6 text-right">
+                <div class="btn-group" style="display: flex;">
+                    <a class="btn btn-outline-primary-light" id="btnDashboard" asp-controller="Vaccine" asp-action="Dashboard">Display Dashboard</a>
+                    <a asp-controller="Vaccine" asp-action="CreateOrder" class="btn btn-success">Add a new Order</a>
+                    <a class="btn btn-outline-primary-light" id="btnPatients" asp-controller="Vaccine" asp-action="HomeVaccine">Display Vaccines</a>
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <!-- Search input for filtering order names -->
+        <input type="text" id="myInputOrders" onkeyup="myFunctionOrders()" placeholder="Search for Order names..">
+        @if (Model.Any())
+        {
+            <!-- Table to display order information -->
+            <table id="myTableOrders" class="table table-bordered table-striped table-sm" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Vaccine Name</th>
+                        <th>Vaccine Manufacturer Name</th>
+                        <th>Quantity</th>
+                        <th>Order Date</th>
+                        <th>Delete Order</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var order in Model)
+                    {
+                        <tr>
+                            <!-- Display order information in table rows -->
+                            <td>@order.VaccineName</td>
+                            <td>@order.CompanyName</td>
+                            <td>@order.Quantity</td>
+                            <td>@order.OrderDate</td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <!-- Button to delete an order -->
+                                    <a asp-controller="Vaccine" asp-action="DeleteOrder" asp-route-ID="@order.OrderID" class="btn btn-primary">🗑</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <!-- Display a message if there are no orders in the list -->
+            <p>No Orders were added yet</p>
+        }
+    </div>
+
+    <!-- JavaScript function for filtering order names -->
+    <script>
+        function myFunctionOrders() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInputOrders");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTableOrders");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

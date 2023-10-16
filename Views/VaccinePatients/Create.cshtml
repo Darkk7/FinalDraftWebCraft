@@ -1,0 +1,116 @@
+﻿@model VaccineProject.Models.VaccinePatients
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add New Patients</title>
+    <!-- Include the stylesheet for VaccineHome.css -->
+    <link rel="stylesheet" href="~/css/VaccineHome.css" asp-append-version="true" />
+</head>
+
+<body>
+    <div class="spinner-border text-primary" id="loadingSpinner" style="display: none;"></div>
+    <form method="post" asp-action="Create" class="container" onsubmit="showSpinner()">
+        <!-- Display model validation errors -->
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <h2 class="text-black-50">Add New Patients 👨‍⚕️👩‍⚕️</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="PatientFullName" style="color: grey">Patient Name:</label>
+                    <input asp-for="PatientFullName" class="form-control" aria-required="true" />
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="IDNumber" style="color: grey">ID Number:</label>
+                    <input asp-for="IDNumber" class="form-control" aria-required="true" />
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="DateOfBirth" style="color: grey">Date Of Birth:</label>
+                    <input asp-for="DateOfBirth" type="date" class="form-control" id="datepicker-dob" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div a class="form-group">
+                    <label asp-for="DateAddedToSystem" style="color: grey">Date Registered:</label>
+                    <input asp-for="DateAddedToSystem" type="date" class="form-control" id="datepicker-registered" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Allergies" style="color: grey">Allergies :</label>
+                    <input asp-for="Allergies" class="form-control" aria-required="true" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Gender" style="color: grey">Gender :</label>
+                    <select asp-for="Gender" class="form-control" aria-required="true">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Email" style="color: grey">Email:</label>
+                    <input asp-for="Email" class="form-control" aria-required="true" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group text-center">
+            <!-- Submit button to add the new patient -->
+            <input type="submit" class="btn btn-info" value="Add" />
+            <!-- Back button to return to the patients list -->
+            <a asp-action="HomePatients" class="btn btn-danger">Back</a>
+        </div>
+    </form>
+
+    <script>
+        // Function to format the date input to YYYY-MM-DD
+        function formatDateToYYYYMMDD(date) {
+            const yyyy = date.getFullYear();
+            const mm = String(date.getMonth() + 1).padStart(2, '0');
+            const dd = String(date.getDate()).padStart(2, '0');
+            return `${yyyy}-${mm}-${dd}`;
+        }
+
+        // Event listener for the Date Of Birth input field
+        document.getElementById('datepicker-dob').addEventListener('change', function () {
+            const inputDate = new Date(this.value);
+            if (!isNaN(inputDate)) {
+                this.value = formatDateToYYYYMMDD(inputDate);
+            }
+        });
+
+        // Event listener for the Date Registered input field
+        document.getElementById('datepicker-registered').addEventListener('change', function () {
+            const inputDate = new Date(this.value);
+            if (!isNaN(inputDate)) {
+                this.value = formatDateToYYYYMMDD(inputDate);
+            }
+        });
+
+        // Function to show a spinner when the form is submitted
+        function showSpinner() {
+            // Show the spinner
+            document.getElementById("loadingSpinner").style.display = "inline-block";
+
+            // Disable the "Add" button to prevent multiple clicks
+            document.querySelector('input[type="submit"]').disabled = true;
+
+            // Change the text of the button to "Loading..."
+            document.querySelector('input[type="submit"]').value = "Loading...";
+        }
+    </script>
+</body>
+</html>

@@ -1,169 +1,320 @@
-﻿@model IEnumerable<VaccineWebApp.Models.VaccineModel>
+﻿@model DashboardViewModel
 
 <head>
     <link rel="stylesheet" href="~/css/VaccineHome.css" asp-append-version="true" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
-    <hr />
-    <h2 style="color: black">Welcome to the Vaccine Dashboard</h2>
-    <hr />
 </head>
 
-<div class="container mt-3">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="chart-container">
-                <canvas id="vaccineChart">
-                    <p>Quantity remaining of each Vaccine</p>
-                </canvas>
+<body>
+    <div class="col-12">
+        <div class="card my-2 statsSummary" id="patient-portal-dashboard-card-appointments-overview">
+            <div class="card-header">
+                <h2>Vaccine Overview</h2>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div class="booking-count">
-                <h4>Bookings for Today:</h4>
-                <p>@ViewBag.BookingCount</p>
-            </div>
-        </div>
+            <div class="card-body">
+                <div class="container mt-3" style="height: 400px;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div id="booking-list" style="max-height: 300px; overflow: auto;">
+                                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search Patient names..">
+                                <div style="overflow-x: auto; text-align: center;">
+                                    <h3>Vaccine Bookings</h3>
+                                    <table id="myTable" class="table table-striped" style="min-width: 100%; table-layout: fixed; font-size: 10px;">
+                                        <colgroup>
+                                            <col style="width: 25%;">
+                                            <col style="width: 25%;">
+                                            <col style="width: 25%;">
+                                            <col style="width: 25%;">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>Patient Full Name</th>
+                                                <th>Nurse/Doctor Full Name</th>
+                                                <th>Vaccine Name</th>
+                                                <th>Booking Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var booking in Model.Bookings)
+                                            {
+                                                <tr>
+                                                    <td>@booking.PatientFullName</td>
+                                                    <td>@booking.NurseFullName</td>
+                                                    <td>@booking.VaccineName</td>
+                                                    <td>@booking.BookingDate</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
 
-        @if (!string.IsNullOrEmpty(ViewBag.LowQuantityAlert))
-        {
-            <div class="alert alert-danger mt-3">
-                @Html.Raw(ViewBag.LowQuantityAlert)
-            </div>
-        }
-    </div>
-</div>
+                        </div>
 
-<hr />
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-3">
-            <div class="card my-3" id="patient-portal-dashboard-card-useful-links">
-                <div class="card-header">
-                    <h2>Useful Links</h2>
-                </div>
-                <div class="card-body p-0">
-                    <table class="table w-100 table-dashboard-middle">
-                        <tbody>
-                            <tr height="50%" width="100%">
-                                <td class="text-center border-right pt-3">
-                                    <h3 class="text-transform-none">Vaccine Bookings</h3>
-                                    <p>To display the Vaccine Bookings that were made for patients</p>
-                                    <a class="btn btn-outline-primary-light" id="btnVaccineBooking" asp-controller="VaccineBooking" asp-action="HomeBooking">
-                                        Display Vaccine Bookings
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card my-3" id="patient-portal-dashboard-card-useful-links">
-                <div class="card-header">
-                    <h2>To Browse</h2>
-                </div>
-                <div class="card-body p-0">
-                    <table class="table w-100 table-dashboard-middle">
-                        <tbody>
-                            <tr height="50%" width="100%">
-                                <td class="text-center border-right pt-3">
-                                    <h3 class="text-transform-none">Vaccines</h3>
-                                    <p>All the different vaccines offered at the facility are found here</p>
-                                    <a class="btn btn-outline-primary-light" id="btnVaccine" asp-controller="Vaccine" asp-action="HomeVaccine">
-                                        Display Available Vaccines
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card my-3" id="patient-portal-dashboard-card-useful-links">
-                <div class="card-header">
-                    <h2>& Use The</h2>
-                </div>
-                <div class="card-body p-0">
-                    <table class="table w-100 table-dashboard-middle">
-                        <tbody>
-                            <tr height="50%" width="100%">
-                                <td class="text-center border-right pt-3">
-                                    <h3 class="text-transform-none">Vaccine Types</h3>
-                                    <p>Find the different vaccine types offered at the facility here</p>
-                                    <a class="btn btn-outline-primary-light" id="btnVaccineType" asp-controller="VaccineType" asp-action="HomeVaccineType">
-                                        Display Vaccine Types
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card my-3" id="patient-portal-dashboard-card-useful-links">
-                <div class="card-header">
-                    <h2>System</h2>
-                </div>
-                <div class="card-body p-0">
-                    <table class="table w-100 table-dashboard-middle">
-                        <tbody>
-                            <tr height="50%" width="100%">
-                                <td class="text-center pt-3">
-                                    <h3 class="text-transform-none">Patient & Vaccine Details</h3>
-                                    <p>To check whether a patient has received a specific vaccine at the facility before</p>
-                                    <a class="btn btn-outline-primary-light" id="btnPatientVac" asp-controller="PatientVaccineDetails" asp-action="HomePatientVaccine">
-                                        Display Patient and Vaccine Details
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                        <div class="col-md-4">
+                            <div class="booking-count d-flex align-items-center">
+                                <span style="font-size: 10px;"></span>
+                                <div class="ml-auto">
+                                    <h4>📅 Bookings for Today:</h4>
+                                    <p>@Model.BookingCount</p>
+                                    <h4>👥 Total Registered Patients:</h4>
+                                    <p>@Model.TotalRegisteredPatients</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div id="vaccine-pie-chart" style="text-align: center;">
+                                <h3>Vaccine Quantity</h3>
+                                <canvas id="vaccineChart" width="200" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+    <div class="col">
+        <div class="card my-3" id="patient-portal-dashboard-card-useful-links">
+            <div class="card-header">
+                <h2>Useful Links</h2>
+            </div>
+            <div class="card-body p-0">
+                <table class="table w-100 table-dashboard-middle">
+                    <tbody>
+                        <tr height="50%">
+                            <td class="text-center border-right pt-3">
+                                <h3 class="text-transform-none">Vaccine Bookings</h3>
+                                <p>To display the Vaccine Bookings that were made for patients</p>
+                                <a class="btn btn-outline-primary-light" id="btnVaccineBooking" asp-controller="VaccineBooking" asp-action="HomeBooking">
+                                    Display Vaccine Bookings
+                                </a>
+                            </td>
+                            <td class="text-center border-right pt-3">
+                                <h3 class="text-transform-none">Vaccines</h3>
+                                <p>All the different vaccines offered at the facility are found here</p>
+                                <a class="btn btn-outline-primary-light" id="btnVaccine" asp-controller="Vaccine" asp-action="HomeVaccine">
+                                    Display Available Vaccines
+                                </a>
+                            </td>
+                            <td class="text-center border-right pt-3">
+                                <h3 class="text-transform-none">Registered Patients</h3>
+                                <p>Find the different Registered Patients</p>
+                                <a class="btn btn-outline-primary-light" id="btnPatients" asp-controller="VaccinePatients" asp-action="HomePatients">
+                                    Display Registered Patients
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center border-right pt-3">
+                                <h3 class="text-transform-none">Vaccine Types</h3>
+                                <p>Find the different vaccine types offered at the facility here</p>
+                                <a class="btn btn-outline-primary-light" id="btnVaccineType" asp-controller="VaccineType" asp-action="HomeVaccineType">
+                                    Display Vaccine Types
+                                </a>
+                            </td>
+                            <td class="text-center pt-3">
+                                <h3 class="text-transform-none">Patient & Vaccine Details</h3>
+                                <p>To check whether a patient has received a specific vaccine at the facility before</p>
+                                <a class="btn btn-outline-primary-light" id="btnPatientVac" asp-controller="VaccineBooking" asp-action="PatientVaccine">
+                                    Display Patient and Vaccine Details
+                                </a>
+                            </td>
+                            <td class="text-center pt-3">
+                                <h3 class="text-transform-none">The Links Purpose</h3>
+                                <p> 🧭 These links allow you to navigate the e-Nompilo Healthcare Vaccine & Patient Management system 🧭 </p>
+                                <img src="~/css/logo.jpg" alt="Logo" height="200" width="200" class="d-inline-block align-top">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+<section class="faq-section section-padding" id="section_4">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-6 col-12">
+                <hr />
+                <h2 class="mb-4" style="color: black">Frequently Asked Questions about Vaccines</h2>
+                <hr />
+            </div>
+
+            <div class="col-lg-6 col-12 m-auto">
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                Can a vaccine cause my baby to get sick?
+                            </button>
+                        </h2>
+
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
+                            <div class="accordion-body">
+                                Vaccines are extremely safe, and serious side effects are rare. Almost all sickness or discomfort after vaccination is minor and temporary, such as soreness at the injection site or mild fever. These can often be controlled by taking over-the-counter pain medication as advised by a doctor or applying a cold cloth to the injection site. If parents are concerned, they should contact their doctor or health care provider.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                What diseases do vaccines prevent?
+                            </button>
+                        </h2>
+
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample" style="">
+                            <div class="accordion-body">
+                                Vaccines protect your child against serious illnesses like polio, which can cause paralysis; measles, which can cause brain swelling and blindness; and tetanus, which can cause painful muscle contractions and difficulty eating and breathing, especially in newborns.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                What is the recommended vaccine schedule?
+                            </button>
+                        </h2>
+
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample" style="">
+                            <div class="accordion-body">
+                                Immunization schedules vary by country depending on which diseases are most prevalent. You can find an overview of the recommended vaccines and approximate dates from your local health center, doctor, or your government’s Ministry of Health.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
 
 <script>
-    var vaccineData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model));
+    // Get the vaccine data from ViewBag and parse it
+    var vaccineData = @Html.Raw(ViewBag.VaccineData);
+
+    // Get the canvas element
     var ctx = document.getElementById('vaccineChart').getContext('2d');
-    var chart = new Chart(ctx, {
+
+    // Extract names and quantities from the vaccineData
+    var names = vaccineData.map(function (item) { return item.Name; });
+    var quantities = vaccineData.map(function (item) { return item.Quantity; });
+
+    // Create the pie chart
+    var pieChart = new Chart(ctx, {
         type: 'pie',
         data: {
-            labels: vaccineData.map(v => v.Name),
+            labels: names,
             datasets: [{
-                data: vaccineData.map(v => v.Quantity),
+                data: quantities,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.7)',
                     'rgba(54, 162, 235, 0.7)',
                     'rgba(255, 206, 86, 0.7)',
                     'rgba(75, 192, 192, 0.7)',
-                    'rgba(153, 102, 255, 0.7)',
-                    'rgba(255, 159, 64, 0.7)'
-                ]
+                    'rgba(153, 102, 255, 0.7)'
+                    // Add more colors if needed
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)'
+                    // Add more colors if needed
+                ],
+                borderWidth: 1
             }]
         },
         options: {
-            responsive: false, /* Disable responsiveness to keep it static */
-            plugins: {
-                datalabels: {
-                    color: '#333', // Text color
-                    anchor: 'end', // Position of the value relative to the pie slice
-                    align: 'start', // Alignment of the value text
-                    font: {
-                        size: 12, // Font size of the value text
-                        weight: 'bold' // Font weight of the value text
-                    },
-                    formatter: function (value, context) {
-                        return value; // Display the quantity as the value on the slice
-                    }
+            responsive: true,
+            maintainAspectRatio: false
+            // Add more chart options if needed
+        }
+    });
+    $(document).ready(function () {
+        // Function to update the booking list
+        function updateBookingList() {
+            $.ajax({
+                url: '@Url.Action("GetAllBookings", "VaccineBooking")', // Adjust the URL to your controller action
+                type: 'GET',
+                success: function (data) {
+                    // Clear the current content
+                    $('#booking-list').empty();
+
+                    // Add the updated bookings to the list
+                    $.each(data, function (index, booking) {
+                        $('#booking-list').append('<div>' +
+                            '<p>Patient Full Name: ' + booking.PatientFullName + '</p>' +
+                            '<p>Vaccine Name: ' + booking.VaccineName + '</p>' +
+                            '<p>Booking Date: ' + booking.BookingDate + '</p>' + // Add Booking Date
+                            '</div>');
+                    });
+                },
+                error: function () {
+                    console.error('Error loading bookings.');
+                }
+            });
+        }
+
+        // Call the updateBookingList function on page load
+        updateBookingList();
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Make an AJAX request to retrieve booking data
+        $.ajax({
+            url: '/VaccineBooking/Create', // Modify the URL as needed
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                // Process the retrieved booking data and display it in the #booking-list div
+                if (data.success) {
+                    var bookingList = $('#booking-list');
+                    bookingList.empty(); // Clear the existing content
+
+                    // Loop through the bookings and append them to the list
+                    $.each(data.bookings, function (index, booking) {
+                        var bookingInfo = '<p>Patient Full Name: ' + booking.PatientFullName + '</p>' +
+                            '<p>Vaccine Name: ' + booking.VaccineName + '</p><hr>';
+                        bookingList.append(bookingInfo);
+                    });
+                } else {
+                    // Handle errors if needed
+                    console.log(data.errors);
+                }
+            },
+            error: function (xhr, status, error) {
+                // Handle AJAX error if needed
+                console.error(xhr.responseText);
+            }
+        });
+    });
+    function myFunction() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
                 }
             }
         }
-    });
+    }
 </script>

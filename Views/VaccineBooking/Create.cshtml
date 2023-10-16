@@ -1,75 +1,69 @@
-﻿@model VaccineWebApp.Models.VaccinationBookingModel
+﻿@model VaccineProject.Models.VaccinationBookingModel
 
 <head>
     <link rel="stylesheet" href="~/css/VaccineHome.css" asp-append-version="true" />
+    <div class="spinner-border text-primary" id="loadingSpinner" style="display: none;"></div>
 </head>
 
-
-<form method="post" asp-action="Create">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="border p-3">
-        <div class="form-group row">
-            <h2 class="text-black-50 pl-3">Add New Booking</h2>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="form-group row">
-                    <div class="form-floating mb-3">
-
-                        <input asp-for="PatientID" class="form-control" aria-required="true" />
-
-                        <label asp-for="PatientID">Patient ID: </label>
-
+<body>
+    <form method="post" asp-action="Create" onsubmit="showSpinnerAndSubmit()">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="container">
+            <h2 class="text-black-50">Add New Booking 📅</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="PatientFullName" style="color: grey">Patient Full Name:</label>
+                        <input asp-for="PatientFullName" class="form-control" aria-required="true" />
                     </div>
-
-                    <div class="form-floating mb-3">
-
-                        <input asp-for="VaccineID" class="form-control" aria-required="true" required />
-
-                        <label asp-for="VaccineID">Vaccine ID: </label>
-
+                    <div class="form-group">
+                        <label asp-for="NurseFullName" style="color: grey">Nurse/Doctor Full Name:</label>
+                        <input asp-for="NurseFullName" class="form-control" aria-required="true" required />
                     </div>
-
-                  <div class="col-4" style=" width: 100% ">
-                    <label asp-for="BookingDate" style=" color: grey">Booking Date: </label>
-                    <input asp-for="BookingDate" height="10px" type="datetime-local" class="form-control" id="datepicker" />
-                  </div>
-
-                    <div class="form-floating mb-3">
-
+                    <div class="form-group">
+                        <label asp-for="VaccineName" style="color: grey">Vaccine Name:</label>
+                        <input asp-for="VaccineName" class="form-control" aria-required="true" required />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="BookingDate" style="color: grey">Booking Date:</label>
+                        <input asp-for="BookingDate" type="datetime-local" class="form-control" id="datepicker" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DoseNumber" style="color: grey">Vaccine Doses:</label>
                         <input asp-for="DoseNumber" class="form-control" aria-required="true" required />
-
-                        <label asp-for="DoseNumber">Vaccine Dose Number:  </label>
-
                     </div>
                 </div>
             </div>
-            <div class="form-group row">
-                <div class="col-8 offset-2 row">
-                    <div class="col">
-                        <input type="submit" class="btn btn-info w-75" value="Add" />
-                    </div>
-                    <div class="col">
-                        <a asp-action="HomeBooking" class="btn btn-danger w-75">Back</a>
-                    </div>
-                </div>
+            <div class="form-group text-center">
+                <input type="submit" class="btn btn-info" value="Add" />
+                <a asp-action="HomeBooking" class="btn btn-danger">Back</a>
             </div>
-
         </div>
-    </div>
-</form>
+    </form>
 
-@* Add the following script at the bottom of the file: *@
-@section Scripts{
-    <script>
-        $(document).ready(function () {
-            $("#datepicker").datepicker({
-                dateFormat: "dd/mm/yy",
-                minDate: 0, // restrict dates to be selected from today onwards
+    @section Scripts{
+        <script>
+            $(document).ready(function () {
+                $("#datepicker").datepicker({
+                    dateFormat: "dd/mm/yy",
+                    minDate: 0,
+                });
             });
-        });
 
-      
-        });
-    </script>
-}
+            function showSpinnerAndSubmit() {
+                // Show the spinner
+                document.getElementById("loadingSpinner").style.display = "inline-block";
+
+                // Disable the "Add" button to prevent multiple clicks
+                document.querySelector('input[type="submit"]').disabled = true;
+
+                // Change the text of the button to "Loading..."
+                document.querySelector('input[type="submit"]').value = "Loading...";
+            }
+        </script>
+    }
+</body>
+</html>
+

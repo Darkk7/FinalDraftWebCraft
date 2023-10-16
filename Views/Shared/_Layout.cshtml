@@ -13,7 +13,7 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <img src="~/css/logo.png" alt="Logo" height="100" width= "70" class="d-inline-block align-top">
+                    <img src="~/css/logo.jpg" alt="Logo" height="100" width= "100" class="d-inline-block align-top">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -46,7 +46,7 @@
                                 <a class="dropdown-item" href="#">Walk-In Patients</a>
                                 <a class="dropdown-item" href="#">Chronic Medication</a>
                                 <a class="dropdown-item" href="@Url.Action("BookingAppointments", "Home")">Pre-Natal Care</a>
-                                <a class="dropdown-item"  asp-controller="Vaccine" asp-action="Dashboard">Vaccinations</a>
+                                <a class="dropdown-item" asp-controller="Vaccine" asp-action="Login">Vaccinations</a>
                                 <a class="dropdown-item" href="#">Referrals</a>
                             </div>
                         </li>

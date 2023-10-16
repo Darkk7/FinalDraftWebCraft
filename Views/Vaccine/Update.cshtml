@@ -1,48 +1,79 @@
-﻿@model VaccineWebApp.Models.VaccineModel
+﻿@model VaccineProject.Models.VaccineModel
 
 <head>
+    <!-- Include the stylesheet for VaccineHome.css -->
     <link rel="stylesheet" href="~/css/VaccineHome.css" asp-append-version="true" />
 </head>
 
-<form method="post" asp-action="Update">
+<form method="post" asp-action="Update" onsubmit="showSpinnerAndSubmit()">
+    <!-- Hidden input for VaccineID -->
     <input asp-for="VaccineID" hidden />
+
+    <!-- Outer border and main form container -->
     <div class="border p-3">
+        <!-- Title for updating vaccine -->
         <div class="form-group row">
             <h2 class="text-black-50 pl-3">Update Vaccine</h2>
         </div>
+
+        <!-- Form fields for vaccine information -->
         <div class="row">
             <div class="col-12">
                 <div class="form-group row">
+                    <!-- Vaccine Name -->
                     <div class="col-4">
-                        <label asp-for="Name">Vaccine Name: </label>
-                        <input asp-for="Name" class="form-control" />
+                        <label asp-for="VaccineName" style="color: grey">Vaccine Name:</label>
+                        <input asp-for="VaccineName" class="form-control" />
                     </div>
+
+                    <div class="form-group">
+                        <label asp-for="Manufacturer" style="color: grey">Vaccine Manufacturer Name:</label>
+                        <input asp-for="Manufacturer" class="form-control" aria-required="true" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TypeName" style="color: grey">Vaccine Type Name:</label>
+                        <input asp-for="TypeName" class="form-control" aria-required="true" />
+                    </div>
+
+                    <!-- Doses Needed -->
                     <div class="col-4">
-                        <label asp-for="DosesNeeded">Doses Needed: </label>
+                        <label asp-for="DosesNeeded" style="color: grey">Doses Needed:</label>
                         <input asp-for="DosesNeeded" class="form-control" />
                     </div>
+
+                    <!-- Quantity -->
                     <div class="col-4">
-                        <label asp-for="Quantity">Quantity:</label>
+                        <label asp-for="Quantity" style="color: grey">Quantity:</label>
                         <input asp-for="Quantity" class="form-control" />
                     </div>
+
+                    <!-- Low Quantity -->
                     <div class="col-4">
-                        <label asp-for="LowQuantity">Low Quantity:</label>
+                        <label asp-for="LowQuantity" style="color: grey">Low Quantity:</label>
                         <input asp-for="LowQuantity" class="form-control" />
                     </div>
+
+                    <!-- Vaccine Type -->
                     <div class="col-4">
-                        <label asp-for="TypeName">Vaccine Type:</label>
+                        <label asp-for="TypeName" style="color: grey">Vaccine Type:</label>
                         <input asp-for="TypeName" class="form-control" />
                     </div>
+
+                    <!-- Medical Aid Accepted -->
                     <div class="col-4">
-                        <label asp-for="MedAidNo">Medical Aid Accepted:</label>
+                        <label asp-for="MedAidNo" style="color: grey">Medical Aid Accepted:</label>
                         <input asp-for="MedAidNo" class="form-control" />
                     </div>
+
+                    <!-- Vaccine Price -->
                     <div class="col-4">
-                        <label asp-for="Price">Vaccine Price:</label>
+                        <label asp-for="Price" style="color: grey">Vaccine Price:</label>
                         <input asp-for="Price" class="form-control" />
                     </div>
                 </div>
             </div>
+
+            <!-- Buttons for Update and Back -->
             <div class="form-group row">
                 <div class="col-8 offset-2 row">
                     <div class="col">

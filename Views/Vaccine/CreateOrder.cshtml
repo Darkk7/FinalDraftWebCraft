@@ -1,0 +1,68 @@
+﻿@model VaccineProject.Models.OrderModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/VaccineHome.css" asp-append-version="true" />
+</head>
+
+<body>
+    <!-- Display a loading spinner (hidden by default) -->
+    <div class="spinner-border text-primary" id="loadingSpinner" style="display: none;"></div>
+
+    <!-- Create a form for adding a new vaccine -->
+    <form method="post" asp-action="Create" class="container" onsubmit="showSpinnerAndSubmit()">
+        <!-- Display validation summary for the model -->
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <h2 class="text-black-50">Add New Order </h2>
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Input for Vaccine Name -->
+                <div class="form-group">
+                    <label asp-for="VaccineName" style="color: grey">Vaccine Name:</label>
+                    <input asp-for="VaccineName" class="form-control" aria-required="true" />
+                </div>
+                <!-- Input for Doses Needed -->
+                <div class="form-group">
+                    <label asp-for="CompanyName" style="color: grey">Vaccine Manufacturer Name:</label>
+                    <input asp-for="CompanyName" class="form-control" aria-required="true" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <!-- Input for Vaccine Quantity -->
+                <div class="form-group">
+                    <label asp-for="Quantity" style="color: grey">Vaccine Quantity:</label>
+                    <input asp-for="Quantity" class="form-control" aria-required="true" />
+                </div>
+                <!-- Input for Low Quantity -->
+                <div class="form-group">
+                    <label asp-for="OrderDate" style="color: grey">Order Date:</label>
+                    <input asp-for="OrderDate" type="datetime-local" class="form-control" id="datepicker" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Buttons for adding and going back -->
+        <div class="form-group text-center">
+            <input type="submit" class="btn btn-info" value="Add" asp-action="CreateOrder" asp-controller="Vaccine" />
+            <a asp-action="HomeOrders" class="btn btn-danger">Back</a>
+        </div>
+    </form>
+
+    <!-- JavaScript code for showing the loading spinner -->
+    @section Scripts{
+        <script>
+            function showSpinnerAndSubmit() {
+                // Show the spinner
+                document.getElementById("loadingSpinner").style.display = "inline-block";
+
+                // Disable the "Add" button to prevent multiple clicks
+                document.querySelector('input[type="submit"]').disabled = true;
+
+                // Change the text of the button to "Loading..."
+                document.querySelector('input[type="submit"]').value = "Loading...";
+            }
+        </script>
+    }
+</body>
+</html>

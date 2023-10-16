@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using VaccineWebApp.Data;
+using VaccineProject.Data;
 
 #nullable disable
 
-namespace VaccineWebApp.Data.Migrations
+namespace VaccineProject.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -17,7 +17,7 @@ namespace VaccineWebApp.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.16")
+                .HasAnnotation("ProductVersion", "6.0.22")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -224,54 +224,57 @@ namespace VaccineWebApp.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("VaccineWebApp.Models.Nurse", b =>
+            modelBuilder.Entity("VaccineProject.Models.DashboardPin", b =>
                 {
-                    b.Property<int>("NurseID")
+                    b.Property<int>("PinID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NurseID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PinID"), 1L, 1);
 
-                    b.Property<string>("IDNumber")
+                    b.Property<string>("Pin")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("PinID");
 
-                    b.Property<string>("Surname")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("NurseID");
-
-                    b.ToTable("Nurse");
+                    b.ToTable("Pins");
                 });
 
-            modelBuilder.Entity("VaccineWebApp.Models.PatientVaccineDetails", b =>
+            modelBuilder.Entity("VaccineProject.Models.OrderModel", b =>
                 {
-                    b.Property<int>("PatientVaccineID")
+                    b.Property<int>("OrderID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PatientVaccineID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderID"), 1L, 1);
 
-                    b.Property<int>("NumberOfDoses")
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OrderDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Quantity")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("VaccineID")
                         .HasColumnType("int");
 
-                    b.Property<int>("PatientID")
-                        .HasColumnType("int");
+                    b.Property<string>("VaccineName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("VaccineID")
-                        .HasColumnType("int");
+                    b.HasKey("OrderID");
 
-                    b.HasKey("PatientVaccineID");
+                    b.HasIndex("VaccineID");
 
-                    b.ToTable("patientVaccineDetails");
+                    b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("VaccineWebApp.Models.VaccinationBookingModel", b =>
+            modelBuilder.Entity("VaccineProject.Models.VaccinationBookingModel", b =>
                 {
                     b.Property<int>("VaccineBookingID")
                         .ValueGeneratedOnAdd()
@@ -280,26 +283,42 @@ namespace VaccineWebApp.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VaccineBookingID"), 1L, 1);
 
                     b.Property<string>("BookingDate")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DoseNumber")
                         .HasColumnType("int");
 
-                    b.Property<int>("PatientID")
+                    b.Property<string>("NurseFullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PatientFullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
+
+                    b.Property<int?>("VaccineID")
                         .HasColumnType("int");
 
-                    b.Property<int>("VaccineID")
+                    b.Property<string>("VaccineName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("VaccinePatientID")
                         .HasColumnType("int");
 
                     b.HasKey("VaccineBookingID");
 
                     b.HasIndex("VaccineID");
 
+                    b.HasIndex("VaccinePatientID");
+
                     b.ToTable("vaccineBookings");
                 });
 
-            modelBuilder.Entity("VaccineWebApp.Models.VaccineModel", b =>
+            modelBuilder.Entity("VaccineProject.Models.VaccineModel", b =>
                 {
                     b.Property<int>("VaccineID")
                         .ValueGeneratedOnAdd()
@@ -313,11 +332,11 @@ namespace VaccineWebApp.Data.Migrations
                     b.Property<int>("LowQuantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("MedAidNo")
+                    b.Property<string>("Manufacturer")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("MedAidNo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -327,16 +346,65 @@ namespace VaccineWebApp.Data.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
+                    b.Property<int?>("TypeID")
+                        .HasColumnType("int");
+
                     b.Property<string>("TypeName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VaccineName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("VaccineID");
 
+                    b.HasIndex("TypeID");
+
                     b.ToTable("vaccine");
                 });
 
-            modelBuilder.Entity("VaccineWebApp.Models.VaccineTypeModel", b =>
+            modelBuilder.Entity("VaccineProject.Models.VaccinePatients", b =>
+                {
+                    b.Property<int>("VaccinePatientID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VaccinePatientID"), 1L, 1);
+
+                    b.Property<string>("Allergies")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateAddedToSystem")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IDNumber")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
+                    b.Property<string>("PatientFullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("VaccinePatientID");
+
+                    b.ToTable("VaccinePatients");
+                });
+
+            modelBuilder.Entity("VaccineProject.Models.VaccineTypeModel", b =>
                 {
                     b.Property<int>("TypeID")
                         .ValueGeneratedOnAdd()
@@ -408,15 +476,37 @@ namespace VaccineWebApp.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("VaccineWebApp.Models.VaccinationBookingModel", b =>
+            modelBuilder.Entity("VaccineProject.Models.OrderModel", b =>
                 {
-                    b.HasOne("VaccineWebApp.Models.VaccineModel", "Vaccine")
+                    b.HasOne("VaccineProject.Models.VaccineModel", "Vaccine")
                         .WithMany()
-                        .HasForeignKey("VaccineID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("VaccineID");
 
                     b.Navigation("Vaccine");
+                });
+
+            modelBuilder.Entity("VaccineProject.Models.VaccinationBookingModel", b =>
+                {
+                    b.HasOne("VaccineProject.Models.VaccineModel", "Vaccine")
+                        .WithMany()
+                        .HasForeignKey("VaccineID");
+
+                    b.HasOne("VaccineProject.Models.VaccinePatients", "VaccinePatients")
+                        .WithMany()
+                        .HasForeignKey("VaccinePatientID");
+
+                    b.Navigation("Vaccine");
+
+                    b.Navigation("VaccinePatients");
+                });
+
+            modelBuilder.Entity("VaccineProject.Models.VaccineModel", b =>
+                {
+                    b.HasOne("VaccineProject.Models.VaccineTypeModel", "VaccineType")
+                        .WithMany()
+                        .HasForeignKey("TypeID");
+
+                    b.Navigation("VaccineType");
                 });
 #pragma warning restore 612, 618
         }

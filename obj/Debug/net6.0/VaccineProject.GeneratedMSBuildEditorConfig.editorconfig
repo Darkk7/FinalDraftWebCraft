@@ -1,0 +1,133 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = VaccineProject
+build_property.RootNamespace = VaccineProject
+build_property.ProjectDir = C:\Users\jokwa\Documents\Nelson Mandela University Study Folder\3rd Year\ONT3001\Examples\VaccineProject\VaccineProject\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\jokwa\Documents\Nelson Mandela University Study Folder\3rd Year\ONT3001\Examples\VaccineProject\VaccineProject
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/Areas/Identity/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/Views/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/Views/VaccineBooking/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmFjY2luZUJvb2tpbmdcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/Views/VaccineBooking/HomeBooking.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmFjY2luZUJvb2tpbmdcSG9tZUJvb2tpbmcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/Views/VaccineBooking/PatientReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmFjY2luZUJvb2tpbmdcUGF0aWVudFJlcG9ydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/Views/VaccineBooking/PatientVaccine.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmFjY2luZUJvb2tpbmdcUGF0aWVudFZhY2NpbmUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/Views/VaccineBooking/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmFjY2luZUJvb2tpbmdcVXBkYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/Views/VaccinePatients/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmFjY2luZVBhdGllbnRzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/Views/VaccinePatients/HomePatients.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmFjY2luZVBhdGllbnRzXEhvbWVQYXRpZW50cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/Views/VaccinePatients/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmFjY2luZVBhdGllbnRzXFVwZGF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/Views/VaccineType/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmFjY2luZVR5cGVcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/Views/VaccineType/HomeVaccineType.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmFjY2luZVR5cGVcSG9tZVZhY2NpbmVUeXBlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/Views/VaccineType/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmFjY2luZVR5cGVcVXBkYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/Views/Vaccine/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmFjY2luZVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/Views/Vaccine/CreateOrder.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmFjY2luZVxDcmVhdGVPcmRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/Views/Vaccine/Dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmFjY2luZVxEYXNoYm9hcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/Views/Vaccine/HomeOrders.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmFjY2luZVxIb21lT3JkZXJzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/Views/Vaccine/HomeVaccine.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmFjY2luZVxIb21lVmFjY2luZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/Views/Vaccine/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmFjY2luZVxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/Views/Vaccine/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmFjY2luZVxVcGRhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/Views/Vaccine/UpdateOrder.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmFjY2luZVxVcGRhdGVPcmRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/wwwroot/css/Areas/Identity/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = d3d3cm9vdFxjc3NcQXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jokwa/Documents/Nelson Mandela University Study Folder/3rd Year/ONT3001/Examples/VaccineProject/VaccineProject/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-q5utsbaom7

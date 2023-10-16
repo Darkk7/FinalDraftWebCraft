@@ -1,0 +1,93 @@
+﻿@model VaccineProject.Models.PatientReportViewModel
+
+<!DOCTYPE html>
+<head>
+    <!-- Include the stylesheet for VaccineHome.css -->
+    <link rel="stylesheet" href="~/css/VaccineHome.css" asp-append-version="true" />
+</head>
+<body>
+    <div style="font-family: Arial, sans-serif; margin: 20px;">
+        <div style="background-color: #ffffff; border-radius: 10px; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+            <h1 style="text-align: center;">Patient Report</h1>
+
+            <div style="background-color: lightslategrey; color: white; padding: 10px; text-align: center;">
+                <h2>Patient Information</h2>
+            </div>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                <tr>
+                    <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #f2f2f2;">Patient Full Name</th>
+                    <td style="border: 1px solid black; padding: 8px; text-align: left;">@Model.PatientFullName</td>
+                </tr>
+                <tr>
+                    <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #f2f2f2;">Patient Email</th>
+                    <td style="border: 1px solid black; padding: 8px; text-align: left;">@Model.Email</td>
+                </tr>
+                <tr>
+                    <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #f2f2f2;">Date of Birth</th>
+                    <td style="border: 1px solid black; padding: 8px; text-align: left;">@Model.DateOfBirth.ToShortDateString()</td>
+                </tr>
+                <tr>
+                    <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #f2f2f2;">Date Registered</th>
+                    <td style="border: 1px solid black; padding: 8px; text-align: left;">@Model.DateRegistered.ToShortDateString()</td>
+                </tr>
+                <tr>
+                    <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #f2f2f2;">Allergies</th>
+                    <td style="border: 1px solid black; padding: 8px; text-align: left;">@Model.Allergies</td>
+                </tr>
+                <tr>
+                    <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #f2f2f2;">Gender</th>
+                    <td style="border: 1px solid black; padding: 8px; text-align: left;">@Model.Gender</td>
+                </tr>
+                <tr>
+                    <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #f2f2f2;">Location</th>
+                    <td style="border: 1px solid black; padding: 8px; text-align: left;">eNompilo Healthcare Centre</td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="background-color: #ffffff; border-radius: 10px; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); margin-top: 20px;">
+            <div style="background-color: lightslategrey; color: white; padding: 10px; text-align: center;">
+                <h2>Vaccination Bookings</h2>
+            </div>
+            @if (Model.VaccinationBookings != null && Model.VaccinationBookings.Any())
+            {
+                <table id="vaccinationBookingsTable" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                    <thead>
+                        <tr>
+                            <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #f2f2f2;">Vaccine Name</th>
+                            <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #f2f2f2;">Booking Date</th>
+                            <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #f2f2f2;">Nurse/Doctor Full Name</th>
+                            <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #f2f2f2;">Vaccine Doses</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var booking in Model.VaccinationBookings)
+                        {
+                            <tr>
+                                <td style="border: 1px solid black; padding: 8px; text-align: left;">@booking.VaccineName</td>
+                                <td style="border: 1px solid black; padding: 8px; text-align: left;">@booking.BookingDate</td>
+                                <td style="border: 1px solid black; padding: 8px; text-align: left;">@booking.NurseFullName</td>
+                                <td style="border: 1px solid black; padding: 8px; text-align: left;">@booking.DoseNumber</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>No vaccination bookings available.</p>
+            }
+        </div>
+
+        <!-- Form for generating a patient report screenshot -->
+        <form method="get" asp-action="GeneratePatientReportScreenshot" asp-controller="VaccineBooking">
+            <input type="hidden" name="patientFullName" value="@Model.PatientFullName" />
+            <button type="submit" class="btn btn-primary btn-lg">Generate Screenshot</button>
+        </form>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <p>Generated on: @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")</p>
+        </div>
+    </div>
+</body>
+</html>

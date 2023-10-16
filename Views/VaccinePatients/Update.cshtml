@@ -1,0 +1,106 @@
+﻿@model VaccineProject.Models.VaccinePatients
+
+<!-- Include the VaccineHome.css stylesheet -->
+<head>
+    <link rel="stylesheet" href="~/css/VaccineHome.css" asp-append-version="true" />
+</head>
+
+<body>
+    <!-- Form for updating patient details -->
+    <form method="post" asp-action="Update" onsubmit="showSpinnerAndSubmit()">
+        <input asp-for="VaccinePatientID" hidden />
+        <div class="border p-3">
+            <div class="form-group row">
+                <h2 class="text-black-50 pl-3">Update Patient Details</h2>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group row">
+                        <!-- Input for Patient Name -->
+                        <div class="form-floating mb-3">
+                            <input asp-for="PatientFullName" class="form-control" aria-required="true" />
+                            <label asp-for="PatientFullName" style="color: grey">Patient Name:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="IDNumber" style="color: grey">ID Number:</label>
+                                <input asp-for="IDNumber" class="form-control" aria-required="true" />
+                            </div>
+                        </div>
+                        <div class="col-4" style="width: 100%">
+                            <!-- Input for Date of Birth -->
+                            <label asp-for="DateOfBirth" style="color: grey">Date Of Birth: </label>
+                            <input asp-for="DateOfBirth" height="10px" type="datetime-local" class="form-control" id="datepicker-dob" />
+                        </div>
+                        <div class="col-4" style="width: 100%">
+                            <!-- Input for Date Registered -->
+                            <label asp-for="DateAddedToSystem" style="color: grey">Date Registered: </label>
+                            <input asp-for="DateAddedToSystem" height="10px" type="datetime-local" class="form-control" id="datepicker-registered" />
+                        </div>
+                        <!-- Input for Allergies -->
+                        <div class="form-floating mb-3">
+                            <input asp-for="Allergies" class="form-control" aria-required="true" />
+                            <label asp-for="Allergies" style="color: grey">What Allergies do you have:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Gender" style="color: grey">Gender :</label>
+                                <!-- Dropdown for Gender -->
+                                <select asp-for="Gender" class="form-control" aria-required="true">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Email" style="color: grey">Email:</label>
+                                <input asp-for="Email" class="form-control" aria-required="true" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-8 offset-2 row">
+                        <div class="col">
+                            <!-- Update button -->
+                            <input type="submit" class="btn btn-info w-75" value="Update" />
+                        </div>
+                        <div class="col">
+                            <!-- Back button -->
+                            <a asp-action="HomePatients" class="btn btn-danger w-75">Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
+
+<script>
+    // Function to format a date as yyyy-mm-dd
+    function formatDateToYYYYMMDD(date) {
+        const yyyy = date.getFullYear();
+        const mm = String(date.getMonth() + 1).padStart(2, '0');
+        const dd = String(date.getDate()).padStart(2, '0');
+        return `${yyyy}-${mm}-${dd}`;
+    }
+
+    // Change the date format when the input value changes for Date of Birth
+    document.getElementById('datepicker-dob').addEventListener('change', function () {
+        const inputDate = new Date(this.value);
+        if (!isNaN(inputDate)) {
+            this.value = formatDateToYYYYMMDD(inputDate);
+        }
+    });
+
+    // Change the date format when the input value changes for Date Registered
+    document.getElementById('datepicker-registered').addEventListener('change', function () {
+        const inputDate = new Date(this.value);
+        if (!isNaN(inputDate)) {
+            this.value = formatDateToYYYYMMDD(inputDate);
+        }
+    });
+</script>

@@ -1,0 +1,50 @@
+﻿@model VaccineProject.Models.DashboardPin
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Include the stylesheet for VaccineHome.css -->
+    <link rel="stylesheet" href="~/css/VaccineHome.css" asp-append-version="true" />
+</head>
+<body>
+    <!-- Create a flex container with two cards -->
+    <div style="display: flex; justify-content: space-between;">
+        <div class="card" style="flex: 1; background-color: rgba(255, 255, 255, 0.8);">
+            <div class="card-body">
+                <form id="login-form" method="post" asp-controller="Vaccine" asp-action="AuthenticatePin">
+                    <div class="form-group">
+                        <!-- Input field for entering PIN -->
+                        <input type="text" class="form-control" id="Pin" placeholder="Enter PIN" asp-for="Pin">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+        </div>
+        <div class="card" style="flex: 1; background-color: rgba(255, 255, 255, 0.8);">
+            <div class="card-body mb-0">
+                <h4>You need to enter the correct pin</h4>
+                <p>
+                    A PIN to access the Vaccine Management System was supplied to all employees.
+                    Please don't share the PIN with unauthorized users.
+                </p>
+                <div class="card">
+                    <!-- Display an image -->
+                    <img src="~/css/VaccineWorld.jpeg" class="card-img-top" style="height: 300px;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <!-- Display an error message if it exists in TempData -->
+        <div class="alert alert-danger mt-3">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+</body>
+</html>

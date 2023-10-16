@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using VaccineWebApp.Models;
+using VaccineProject.Models;
 
-namespace VaccineWebApp.Controllers
+namespace VaccineProject.Controllers
 {
     public class HomeController : Controller
     {

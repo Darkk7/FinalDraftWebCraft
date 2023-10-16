@@ -1,8 +1,11 @@
-﻿
-@model IEnumerable<VaccineWebApp.Models.VaccinationBookingModel>
+﻿@model IEnumerable<VaccineProject.Models.VaccinationBookingModel>
 
 <head>
     <link rel="stylesheet" href="~/css/VaccineHome.css" asp-append-version="true" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.366/pdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.366/pdf.worker.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 </head>
 
 <div class="container p-3">
@@ -13,32 +16,38 @@
             <hr />
         </div>
         <div class="col-md-6 text-right">
-            <a class="btn btn-outline-primary-light" id="btnDashboard" asp-controller="Vaccine" asp-action="Dashboard">Display Dashboard</a>
-            <a asp-controller="VaccineBooking" asp-action="Create" class="btn btn-primary">Add a new Booking</a>
+            <div class="btn-group" style="display: flex;">
+                <a class="btn btn-outline-primary-light" id="btnDashboard" asp-controller="Vaccine" asp-action="Dashboard">Display Dashboard</a>
+                <a asp-controller="VaccineBooking" asp-action="Create" class="btn btn-success">Add a new Booking</a>
+                <a class="btn btn-outline-primary-light" id="btnPatients" asp-controller="VaccinePatients" asp-action="HomePatients">Display Registered Patients</a>
+            </div>
         </div>
+
     </div>
     <br />
-
-    @if (Model.Count() > 0)
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search Patient names..">
+    @if (Model.Any())
     {
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search Patient names..">
         <table id="myTable" class="table table-bordered table-striped" style="width:100%">
             <thead>
                 <tr>
-                    <th>Patient Name</th>
+                    <th>Patient Full Name</th>
+                    <th>Nurse/Doctor Full Name</th>
                     <th>Vaccine Name</th>
                     <th>Booking Date</th>
-                    <th>Vaccine Dose Number</th>
+                    <th>Vaccine Doses</th>
                     <th>Update Booking</th>
                     <th>Delete Booking</th>
+                    <th>Patient Report</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var vaccinationBooking in Model)
                 {
                     <tr>
-                        <td width="30%">@vaccinationBooking.PatientID</td>
-                        <td width="30%">@vaccinationBooking.VaccineID</td>
+                        <td width="30%">@vaccinationBooking.PatientFullName</td>
+                        <td width="30%">@vaccinationBooking.NurseFullName</td>
+                        <td width="30%">@vaccinationBooking.VaccineName</td>
                         <td width="30%">@vaccinationBooking.BookingDate</td>
                         <td width="30%">@vaccinationBooking.DoseNumber</td>
                         <td width="10%" style="text-align: right;">
@@ -51,6 +60,11 @@
                                 <a asp-controller="VaccineBooking" asp-action="Delete" asp-route-ID="@vaccinationBooking.VaccineBookingID" class="btn btn-primary">🗑</a>
                             </div>
                         </td>
+                        <td width="10%" style="text-align: center;">
+                            <div class="btn-group" role="group">
+                                <a asp-controller="VaccineBooking" asp-action="PatientReport" asp-route-patientFullName="@vaccinationBooking.PatientFullName" class="btn btn-success">📄 Generate Report</a>
+                            </div>
+                        </td>
                     </tr>
                 }
             </tbody>
@@ -58,7 +72,7 @@
     }
     else
     {
-        <p>No booking have been added</p>
+        <p>No booking has been added</p>
     }
 </div>
 
@@ -86,7 +100,7 @@
                         <td class="text-center pt-3" width="33%">
                             <h3 class="text-transform-none">Patient & Vaccine Details</h3>
                             <p>To check whether a patient has received a Specific Vaccine at the facility before </p>
-                            <a class="btn btn-outline-primary-light" id="btnPatientVac" asp-controller="PatientVaccineDetails" asp-action="HomePatientVaccine">Display Patient and Vaccine Details</a>
+                            <a class="btn btn-outline-primary-light" id="btnPatientVac" asp-controller="VaccineBooking" asp-action="PatientVaccine">Display Patient and Vaccine Details</a>
                         </td>
                     </tr>
                 </tbody>
@@ -152,12 +166,6 @@
                 <hr />
             </div>
 
-            <div class="clearfix"></div>
-
-            <div class="col-lg-5 col-12">
-                <img src="~/css/Elivis.jpg" class="img-fluid" alt="FAQs">
-            </div>
-
             <div class="col-lg-6 col-12 m-auto">
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
@@ -169,7 +177,7 @@
 
                         <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
                             <div class="accordion-body">
-                                Vaccines are extremely safe and serious side effects are rare. Almost all sickness or discomfort after vaccination is minor and temporary, such as a soreness at the injection site or mild fever. These can often be controlled by taking over-the-counter pain medication as advised by a doctor, or applying a cold cloth to the injection site. If parents are concerned, they should contact their doctor or health care provider.
+                                Vaccines are extremely safe, and serious side effects are rare. Almost all sickness or discomfort after vaccination is minor and temporary, such as soreness at the injection site or mild fever. These can often be controlled by taking over-the-counter pain medication as advised by a doctor or applying a cold cloth to the injection site. If parents are concerned, they should contact their doctor or health care provider.
                             </div>
                         </div>
                     </div>
@@ -197,7 +205,7 @@
 
                         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample" style="">
                             <div class="accordion-body">
-                                Immunization schedules vary by country depending on which diseases are most prevalent. You can find an overview of the recommended vaccines and approximate dates from your local health centre, doctor or your government’s Ministry of Health.
+                                Immunization schedules vary by country depending on which diseases are most prevalent. You can find an overview of the recommended vaccines and approximate dates from your local health center, doctor, or your government’s Ministry of Health.
                             </div>
                         </div>
                     </div>
@@ -207,6 +215,8 @@
         </div>
     </div>
 </section>
+
+<iframe id="pdfViewer" style="display: none;"></iframe>
 
 <script>
     function myFunction() {
@@ -230,9 +240,5 @@
             }
         }
     }
+        });
 </script>
-
-
-
-
-

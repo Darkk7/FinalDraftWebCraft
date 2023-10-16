@@ -1,4 +1,4 @@
-namespace VaccineWebApp.Models
+namespace VaccineProject.Models
 {
     public class ErrorViewModel
     {

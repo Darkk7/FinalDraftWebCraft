@@ -1,0 +1,62 @@
+﻿@model VaccineProject.Models.OrderModel
+
+<head>
+    <!-- Include the stylesheet for VaccineHome.css -->
+    <link rel="stylesheet" href="~/css/VaccineHome.css" asp-append-version="true" />
+</head>
+
+<form method="post" asp-action="Update" onsubmit="showSpinnerAndSubmit()">
+    <!-- Hidden input for VaccineID -->
+    <input asp-for="OrderID" hidden />
+
+    <!-- Outer border and main form container -->
+    <div class="border p-3">
+        <!-- Title for updating vaccine -->
+        <div class="form-group row">
+            <h2 class="text-black-50 pl-3">Update Order</h2>
+        </div>
+
+        <!-- Form fields for order information -->
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group row">
+                    <!-- Vaccine Name -->
+                    <div class="col-4">
+                        <label asp-for="VaccineName" style="color: grey">Vaccine Name:</label>
+                        <input asp-for="VaccineName" class="form-control" />
+                    </div>
+
+                    <!-- Company Name -->
+                    <div class="col-4">
+                        <label asp-for="CompanyName" style="color: grey">Vaccine Manufacturer Name:</label>
+                        <input asp-for="CompanyName" class="form-control" />
+                    </div>
+
+                    <!-- Quantity -->
+                    <div class="col-4">
+                        <label asp-for="Quantity" style="color: grey">Quantity:</label>
+                        <input asp-for="Quantity" class="form-control" />
+                    </div>
+
+                    <!-- OrderDate -->
+                    <div class="form-group">
+                        <label asp-for="OrderDate" style="color: grey">Order Date:</label>
+                        <input asp-for="OrderDate" type="datetime-local" class="form-control" id="datepicker" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Buttons for Update and Back -->
+            <div class="form-group row">
+                <div class="col-8 offset-2 row">
+                    <div class="col">
+                        <input type="submit" class="btn btn-info w-75" value="Update" />
+                    </div>
+                    <div class="col">
+                        <a asp-action="HomeVaccine" class="btn btn-danger w-75">Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

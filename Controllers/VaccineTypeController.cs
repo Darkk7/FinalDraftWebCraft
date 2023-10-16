@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using VaccineWebApp.Data;
-using VaccineWebApp.Models;
+using VaccineProject.Data;
+using VaccineProject.Models;
 
 namespace VaccinationSubsytem.Controllers
 {
     public class VaccineTypeController : Controller
     {
-
         private readonly ApplicationDbContext dbContext;
 
         public VaccineTypeController(ApplicationDbContext dBD)
@@ -14,26 +13,27 @@ namespace VaccinationSubsytem.Controllers
             dbContext = dBD;
         }
 
-
+        // Show a list of vaccine types
         public IActionResult HomeVaccineType()
         {
             IEnumerable<VaccineTypeModel> objList = dbContext.vaccineType;
             return View(objList);
         }
 
+        // Show the form for adding a new vaccine type
         public IActionResult Create()
         {
             return View();
         }
 
-
-        //Post-Create
+        // Handle the creation of a new vaccine type
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(VaccineTypeModel vaccineType)
         {
             if (ModelState.IsValid)
             {
+                // Add the new vaccine type to the database
                 dbContext.vaccineType.Add(vaccineType);
                 dbContext.SaveChanges();
                 return RedirectToAction("HomeVaccineType");
@@ -41,7 +41,7 @@ namespace VaccinationSubsytem.Controllers
             return View(vaccineType);
         }
 
-
+        // Show the form for updating a vaccine type
         public IActionResult Update(int? ID)
         {
             if (ID == null || ID == 0)
@@ -55,9 +55,9 @@ namespace VaccinationSubsytem.Controllers
             }
 
             return View(obj);
-
         }
 
+        // Handle the update of a vaccine type
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Update(VaccineTypeModel vaccineType)
@@ -67,6 +67,7 @@ namespace VaccinationSubsytem.Controllers
             return RedirectToAction("HomeVaccineType");
         }
 
+        // Handle the deletion of a vaccine type
         public IActionResult Delete(int? ID)
         {
             var obj = dbContext.vaccineType.Find(ID);

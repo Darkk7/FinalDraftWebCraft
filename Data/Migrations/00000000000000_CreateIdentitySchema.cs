@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace VaccineWebApp.Data.Migrations
+namespace VaccineProject.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {
