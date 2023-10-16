@@ -1,6 +1,9 @@
-﻿@model VaccineWebApp.Models.VaccineTypeModel
+﻿@model VaccineProject.Models.VaccineTypeModel
 
+<!DOCTYPE html>
+<html>
 <head>
+    <!-- Include the VaccineHome.css stylesheet -->
     <link rel="stylesheet" href="~/css/VaccineHome.css" asp-append-version="true" />
 </head>
 
@@ -8,24 +11,54 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <form method="post" asp-action="Create" style="max-width: 500px">
+                <!-- Display a spinner while submitting the form -->
+                <div class="spinner-border text-primary" id="loadingSpinner" style="display: none;"></div>
+
+                <!-- Form for adding a new vaccine type -->
+                <form method="post" asp-action="Create" style="max-width: 500px" onsubmit="showSpinnerAndSubmit()">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <h2 class="mb-4 text-center">Add New Vaccine Type</h2>
-                    <hr />
-                    <div class="mb-3">
-                        <label asp-for="TypeName" class="form-label">Vaccine Type Name:</label>
-                        <input asp-for="TypeName" class="form-control" required />
+                    <div class="border p-3">
+                        <h2 class="text-black-50">Add New Vaccine Type 💉</h2>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <!-- Input for vaccine type name -->
+                                    <label asp-for="TypeName" style="color: grey">Vaccine Type Name:</label>
+                                    <input asp-for="TypeName" class="form-control" aria-required="true" />
+                                </div>
+                                <div class="form-group">
+                                    <!-- Input for description -->
+                                    <label asp-for="Description" style="color: grey">Description:</label>
+                                    <input asp-for="Description" class="form-control" aria-required="true" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label asp-for="Description" class="form-label">Description:</label>
-                        <input asp-for="Description" class="form-control" required />
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <button type="submit" class="btn btn-info">Add</button>
+                    <div class="form-group text-center">
+                        <!-- Add button to submit the form -->
+                        <input type="submit" class="btn btn-info" value="Add" />
+                        <!-- Back button to return to the vaccine types list -->
                         <a asp-action="HomeVaccineType" class="btn btn-danger">Back</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+    @section Scripts{
+        <!-- JavaScript to show a spinner while submitting the form -->
+        <script>
+            function showSpinnerAndSubmit() {
+                // Show the spinner
+                document.getElementById("loadingSpinner").style display = "inline-block";
+
+                // Disable the "Add" button to prevent multiple clicks
+                document.querySelector('input[type="submit"]').disabled = true;
+
+                // Change the text of the button to "Loading..."
+                document.querySelector('input[type="submit"]').value = "Loading...";
+            }
+        </script>
+    }
 </body>
+</html>

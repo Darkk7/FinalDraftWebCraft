@@ -1,6 +1,9 @@
-﻿@model VaccineWebApp.Models.VaccineTypeModel
+﻿@model VaccineProject.Models.VaccineTypeModel
 
+<!DOCTYPE html>
+<html>
 <head>
+    <!-- Include the VaccineHome.css stylesheet -->
     <link rel="stylesheet" href="~/css/VaccineHome.css" asp-append-version="true" />
 </head>
 
@@ -8,22 +11,29 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <form method="post" asp-action="Update">
+                <!-- Form for updating a vaccine type -->
+                <form method="post" asp-action="Update" onsubmit="showSpinnerAndSubmit()">
+                    <!-- Input for the vaccine type ID, hidden -->
                     <input asp-for="TypeID" hidden />
                     <div class="border p-3">
                         <div class="form-group row">
+                            <!-- Title for the form -->
                             <h2 class="text-black-50 pl-3">Update Vaccine Type</h2>
                         </div>
+                        <!-- Input for vaccine type name -->
                         <div class="mb-3">
-                            <label asp-for="TypeName" class="form-label">Vaccine Type Name:</label>
+                            <label asp-for="TypeName" class="form-label" style="color: grey">Vaccine Type Name:</label>
                             <input asp-for="TypeName" class="form-control" required />
                         </div>
+                        <!-- Input for description -->
                         <div class="mb-3">
-                            <label asp-for="Description" class="form-label">Description:</label>
+                            <label asp-for="Description" class="form-label" style="color: grey">Description:</label>
                             <input asp-for="Description" class="form-control" required />
                         </div>
                         <div class="d-flex justify-content-between">
+                            <!-- Submit button to update the vaccine type -->
                             <button type="submit" class="btn btn-info">Update</button>
+                            <!-- Button to go back to the vaccine types list -->
                             <a asp-action="HomeVaccineType" class="btn btn-danger">Back</a>
                         </div>
                     </div>
@@ -32,3 +42,17 @@
         </div>
     </div>
 </body>
+</html>
+
+@section Scripts{
+    <!-- JavaScript function to show a spinner while submitting the form -->
+    <script>
+        function showSpinnerAndSubmit() {
+            // Show the spinner
+            document.getElementById("loadingSpinner").style.display = "inline-block";
+
+            // Disable the "Update" button to prevent multiple clicks
+            document.querySelector('button[type="submit"]').disabled = true;
+        }
+    </script>
+}
